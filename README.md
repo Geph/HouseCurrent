@@ -23,7 +23,7 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 - **Devices:** Enter active watts, standby watts, and a schedule, or record multiple measured kWh intervals. Standby runs outside active hours and is not counted twice.
 - **Schedules:** Run every day or on selected days, continuously or for specific hours. The Nighttime hours checkbox follows one shared winter/summer schedule configured on the rates page.
 - **One-time use:** Record EV charging or other occasional loads as total kWh, or use continuous watts between two dates. Delivered-energy entries can account for charging losses; measured wall energy is used directly.
-- **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the midpoint for cost ranges); headers show average watts, total energy, and base grid cost.
+- **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the displayed cost estimate); headers show average watts, total energy, and base grid cost.
 - **Inventory labels:** Scheduled and continuous-watt estimates are labeled **Est. Continual**, recorded kWh events **One-Time**, and measured device readings **Metered**. Dated entries show their date interval beneath the name; locations appear in group headers.
 - **Power sources:** Separate grid-powered, off-grid solar, and mixed/unallocated loads. Solar items have a panel icon and green background.
 - **Billing periods:** View a saved utility billing interval or usage since the current billing period began. Entries outside the selected period are hidden.
@@ -35,6 +35,7 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 The supplied schedule uses summer rates from June through September and winter rates from October through May. Peak pricing is Monday–Friday, 5–9 pm, using household Mountain Time. Rates are editable.
 
 - Reporting intervals include the starting date and exclude the ending date.
+- Grid costs without a known peak/off-peak split display one estimate: the midpoint of the calculated minimum and maximum base energy costs. Known schedules and timing keep their calculated cost.
 - Modeled costs and savings cover **base energy charges**, not the full utility bill.
 - Utility bills already measure grid imports; solar is never subtracted from those imports again.
 - An AC solar meter after the inverter measures delivered energy. Cumulative solar readings retained in backups use counter differences and support meter-reset baselines. The current interface tracks solar loads on Devices rather than providing a separate solar journal page.
