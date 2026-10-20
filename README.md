@@ -24,11 +24,13 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 - **Schedules:** Run every day or on selected days, continuously or for specific hours. The Nighttime hours checkbox follows one shared winter/summer schedule configured on the rates page.
 - **One-time use:** Record EV charging or other occasional loads as total kWh, or use continuous watts between two dates. Delivered-energy entries can account for charging losses; measured wall energy is used directly.
 - **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the displayed cost estimate); headers show average watts, total energy, and base grid cost.
-- **Inventory labels:** Scheduled and continuous-watt estimates are labeled **Est. Continual**, recorded kWh events **One-Time**, and measured device readings **Metered**. Dated entries show their date interval beneath the name. Devices with specific days or hours show their schedule there, including seasonal nighttime hours; locations appear in group headers.
+- **Inventory labels:** Scheduled and continuous-watt estimates are labeled **Est. Continual**, recorded kWh events **One-Time**, and measured device readings **Metered**. Method labels sit beneath each device name alongside its date interval or schedule, with no separate method column. Devices with specific days or hours show their schedule there, including seasonal nighttime hours; locations appear in group headers.
 - **Power sources:** Separate grid-powered, off-grid solar, and mixed/unallocated loads. Solar items have a panel icon and green background.
 - **Billing periods:** View a saved utility billing interval or usage since the current billing period began. Entries outside the selected period are hidden.
 - **Summary:** See grid kWh, solar kWh, average grid kWh/day (excluding solar and mixed loads), base grid energy cost, and estimated savings from solar. The daily grid average has a dark card, grid cost a muted red card, and solar totals green cards.
 - **Backups:** Export and restore validated JSON files containing records, locations, rates, and settings.
+
+On phones, the inventory uses compact rows with labeled power, energy, and value fields. A **Backup / login** navigation control opens backup tools and, on the PHP version, sign-in or sign-out.
 
 ## Rates and calculation boundaries
 
