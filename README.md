@@ -24,9 +24,10 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 - **Schedules:** Run every day or on selected days, continuously or for specific hours. The Nighttime hours checkbox follows one shared winter/summer schedule configured on the rates page.
 - **One-time use:** Record EV charging or other occasional loads as total kWh, or use continuous watts between two dates. Delivered-energy entries can account for charging losses; measured wall energy is used directly.
 - **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the midpoint for cost ranges); headers show average watts, total energy, and base grid cost.
+- **Inventory labels:** Scheduled and continuous-watt estimates are labeled **Est. Continual**, recorded kWh events **One-Time**, and measured device readings **Metered**. Dated entries show their date interval beneath the name; locations appear in group headers.
 - **Power sources:** Separate grid-powered, off-grid solar, and mixed/unallocated loads. Solar items have a panel icon and green background.
 - **Billing periods:** View a saved utility billing interval or usage since the current billing period began. Entries outside the selected period are hidden.
-- **Summary:** See grid kWh, solar kWh, average grid kWh/day (excluding solar and mixed loads), base grid energy cost, and estimated savings from solar.
+- **Summary:** See grid kWh, solar kWh, average grid kWh/day (excluding solar and mixed loads), base grid energy cost, and estimated savings from solar. The daily grid average has a dark card, grid cost a muted red card, and solar totals green cards.
 - **Backups:** Export and restore validated JSON files containing records, locations, rates, and settings.
 
 ## Rates and calculation boundaries
@@ -81,6 +82,7 @@ Node.js is needed only for these developer commands. No package installation is 
 npm test        # Energy calculations, validation, and export tests
 npm run check   # JavaScript syntax checks
 npm run build   # Regenerate both self-contained HTML copies
+npm run build:server # Generate the PHP hosting folder
 npm run dev     # Local preview at http://127.0.0.1:3022/
 ```
 
@@ -97,7 +99,11 @@ Editable source files:
 | `build-server.mjs` / `server/` | Builds the PHP app with authenticated editing |
 | `tests/` | Regression tests |
 
-After editing the source, run the checks and rebuild `Housecurrent.html` before distributing it.
+After editing the source, run the checks and rebuild `Housecurrent.html` before distributing it. For a PHP installation, also run `npm run build:server` and upload the rebuilt public files; keep the private database in place.
+
+The sidebar subtitle is currently **Miller Street**. Change the `brand-sub` text in `dist/index.html` to personalize it, then rebuild the versions you use.
+
+The test suite contains 56 tests. PHP integration checks require PHP with PDO SQLite; set `HOUSECURRENT_PHP` to the PHP executable path if it is not on `PATH`. Without that runtime, the PHP integration test is skipped.
 
 ## License
 
