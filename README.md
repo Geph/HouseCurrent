@@ -2,7 +2,7 @@
 
 A household electricity tracker for understanding what uses power, what it costs, and how much off-grid solar helps. Track devices in watts or measured kWh, apply seasonal time-of-use rates, and compare usage across utility billing periods.
 
-The editor runs entirely in your browser. There are no dependencies to install, accounts to create, or network assets to load.
+The offline editor runs entirely in your browser. There are no dependencies to install, accounts to create, or network assets to load.
 
 ![Housecurrent devices page showing location groups, grid and solar totals, and device power and energy](docs/devices.jpg)
 
@@ -47,6 +47,18 @@ The editable app saves to browser-local storage. Data is separate between browse
 
 Source files do not contain the household device inventory. Personal backups, generated website snapshots, and local hosting metadata are excluded from Git.
 
+## Hosted editing with a password
+
+For a PHP-capable host such as DreamHost VPS, Housecurrent also supports public viewing with password-protected editing and shared server data. It uses PHP 8.1+ and PDO SQLite, with the database stored outside the public website folder. No production password is included in source or generated files.
+
+```sh
+node build-server.mjs
+```
+
+Upload the generated `hosted/power` contents into the website's `/power` folder, then perform the one-time private SSH setup described in [server/README.md](server/README.md). Sign in and restore your local JSON backup once to migrate the household. Visitors do not upload anything. Changes made online are persisted centrally; public viewers refresh every 30 seconds while visible. The offline editor remains separate.
+
+Server writes require authentication and CSRF protection. The backend limits login attempts, expires editing sessions, validates input, keeps recent revisions, and rejects conflicting writes from stale tabs. See the setup guide for backups, updates, password recovery and PHP integration tests.
+
 ## Read-only website export
 
 You can publish a self-contained snapshot on a static host such as DreamHost. Visitors simply open the link: the data is already included, and there are no add, edit, remove, restore, or rate-editing controls. No backend or visitor file upload is needed.
@@ -82,6 +94,7 @@ Editable source files:
 | `dist/energy.js` | Calculations, validation, and data migration |
 | `build-standalone.mjs` | Builds the offline HTML app |
 | `build-website.mjs` | Builds a read-only viewer from a backup |
+| `build-server.mjs` / `server/` | Builds the PHP app with authenticated editing |
 | `tests/` | Regression tests |
 
 After editing the source, run the checks and rebuild `Housecurrent.html` before distributing it.

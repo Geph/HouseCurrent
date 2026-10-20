@@ -16,3 +16,9 @@ housecurrent-after-*.json
 # Historical local notes and screenshots
 /VALIDATION.md
 /Housecurrent-preview.png
+
+# Hosted build and server-side records
+/hosted/
+*.sqlite
+*.sqlite-*
+/housecurrent-php-upload.zip
