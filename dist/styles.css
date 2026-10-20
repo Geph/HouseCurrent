@@ -23,3 +23,5 @@ tr.solar-device>td{background:#f0f7e9;border-bottom-color:#dfead5}
 .bill-context{display:flex;gap:22px;align-items:center;justify-content:space-between;padding:15px 19px;margin-bottom:20px;border:1px solid var(--line);border-radius:9px;background:#fff}.bill-context strong{display:block;font-size:13px}.bill-context small{display:block;font-size:10px;color:var(--muted);margin:4px 0}.bill-context a{white-space:nowrap}@media(max-width:700px){.bill-context{flex-wrap:wrap;justify-content:flex-start;gap:16px 24px}}
 
 [hidden]{display:none!important}.night-check{display:block;padding:12px;background:#f1f6eb;border-radius:8px}.night-check input{width:auto;margin-right:8px}.night-check small{display:block;margin:5px 0 0 24px;color:var(--muted)}[data-fields]>.field{margin-bottom:16px}.night-settings{margin-top:20px}.heading-actions{flex-wrap:wrap}details summary{cursor:pointer;margin:12px 0;color:#57736a}
+
+.btn[data-action="rooms"]{background:#2868b2;border-color:#2868b2;color:white}.btn[data-action="rooms"]:focus-visible{outline-color:#9ebfeb}

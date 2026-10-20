@@ -220,16 +220,16 @@ export function ensureRooms(s) {
     for(const d of s.devices){const name=String(d.room??'').trim().replace(/\s+/g,' ');if(name&&!s.rooms.some(r=>roomKey(r.name)===roomKey(name)))s.rooms.push({id:'room-'+(s.rooms.length+1),name:name[0].toUpperCase()+name.slice(1),color:nextRoomColor(s.rooms)})}
   }
   validateRooms(s.rooms)
-  for(const d of s.devices){if(!roomKey(d.room))continue;const room=s.rooms.find(r=>roomKey(r.name)===roomKey(d.room));if(!room)throw new Error('Choose a defined room for '+d.name+'.');d.room=room.name}
+  for(const d of s.devices){if(!roomKey(d.room))continue;const room=s.rooms.find(r=>roomKey(r.name)===roomKey(d.room));if(!room)throw new Error('Choose a defined location for '+d.name+'.');d.room=room.name}
   return s
 }
 export function validateRooms(rooms) {
-  if(!Array.isArray(rooms)||rooms.length>200)throw new Error('Invalid room list (up to 200 rooms).')
+  if(!Array.isArray(rooms)||rooms.length>200)throw new Error('Invalid location list (up to 200 locations).')
   const ids=new Set(),names=new Set(),colors=new Set()
   for(const r of rooms){
-    if(typeof r?.id!=='string'||!r.id||r.id.length>100||ids.has(r.id))throw new Error('Rooms need unique IDs.')
-    if(typeof r.name!=='string'||!roomKey(r.name)||r.name.length>80||names.has(roomKey(r.name))||roomKey(r.name)==='unassigned room')throw new Error('Use a unique room name (up to 80 characters).')
-    if(typeof r.color!=='string'||!/^#[0-9a-f]{6}$/i.test(r.color)||colors.has(r.color.toLowerCase()))throw new Error('Each room needs a unique color.')
+    if(typeof r?.id!=='string'||!r.id||r.id.length>100||ids.has(r.id))throw new Error('Locations need unique IDs.')
+    if(typeof r.name!=='string'||!roomKey(r.name)||r.name.length>80||names.has(roomKey(r.name))||['unassigned room','unassigned location'].includes(roomKey(r.name)))throw new Error('Use a unique location name (up to 80 characters).')
+    if(typeof r.color!=='string'||!/^#[0-9a-f]{6}$/i.test(r.color)||colors.has(r.color.toLowerCase()))throw new Error('Each location needs a unique color.')
     ids.add(r.id);names.add(roomKey(r.name));colors.add(r.color.toLowerCase())
   }
   return rooms
@@ -242,7 +242,7 @@ export function updateRoom(s,id,name,color){
   if(previous)for(const d of s.devices)if(roomKey(d.room)===roomKey(previous.name))d.room=name
   s.rooms=rooms;return room
 }
-export function removeRoom(s,id){const room=s.rooms.find(r=>r.id===id);if(!room)throw new Error('Room not found.');for(const d of s.devices)if(roomKey(d.room)===roomKey(room.name))d.room='';s.rooms=s.rooms.filter(r=>r.id!==id)}
+export function removeRoom(s,id){const room=s.rooms.find(r=>r.id===id);if(!room)throw new Error('Location not found.');for(const d of s.devices)if(roomKey(d.room)===roomKey(room.name))d.room='';s.rooms=s.rooms.filter(r=>r.id!==id)}
 
 export function roomUsage(items){
   const totals=new Map()
@@ -306,10 +306,21 @@ export function continuousEventEnergy(d,start,end,rates){
 export function mergeIdleActive(s,idleId,activeId,name,activeIsTotal=false){
   const idle=s.devices.find(d=>d.id===idleId),active=s.devices.find(d=>d.id===activeId)
   if(!idle||!active||idle===active)throw new Error('Choose two different devices.')
-  if(idle.mode!=='schedule'||active.mode!=='schedule'||roomKey(idle.room)!==roomKey(active.room)||idle.source!==active.source)throw new Error('Both entries must be scheduled devices in the same room and on the same power source.')
+  if(idle.mode!=='schedule'||active.mode!=='schedule'||roomKey(idle.room)!==roomKey(active.room)||idle.source!==active.source)throw new Error('Both entries must be scheduled devices in the same location and on the same power source.')
   if(idle.hours!==24||idle.nightTime||idle.summerStartTime||(idle.idleWatts??0)!==0||!Array.from({length:7},(_,i)=>i).every(i=>idle.days.includes(i))||(active.idleWatts??0)!==0)throw new Error('The idle entry must run continuously all week, and neither entry may already have standby.')
   const merged={...active,name:name.trim(),idleWatts:idle.watts,watts:activeIsTotal?active.watts:idle.watts+active.watts}
   validateDevice(merged)
   s.devices=s.devices.filter(d=>d.id!==idleId).map(d=>d.id===activeId?merged:d)
   return merged
+}
+
+
+/** Highest grid cost first; uncertain costs use their midpoint. Keep devices grouped and stable. */
+export function sortByLocationGridCost(items){
+  const totals=roomUsage(items)
+  const cost=key=>{const t=totals.get(key);return (t.gridLow+t.gridHigh)/2}
+  return [...items].sort((a,b)=>{
+    const left=roomKey(a.d.room),right=roomKey(b.d.room)
+    return cost(right)-cost(left)||(left||'unassigned location').localeCompare(right||'unassigned location','en')
+  })
 }

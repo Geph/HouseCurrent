@@ -4,14 +4,14 @@ A household electricity tracker for understanding what uses power, what it costs
 
 The editor runs entirely in your browser. There are no dependencies to install, accounts to create, or network assets to load.
 
-![Housecurrent devices page showing room groups, grid and solar totals, and device power and energy](docs/devices.jpg)
+![Housecurrent devices page showing location groups, grid and solar totals, and device power and energy](docs/devices.jpg)
 
 *Devices page with example data. The example device inventory is for the screenshot; new installations start with an empty inventory.*
 
 ## Get started
 
 1. Download this repository and open **Housecurrent.html** in a modern browser.
-2. On **Devices**, create rooms and add appliances, computers, lighting, or other loads.
+2. On **Devices**, create locations and add appliances, computers, lighting, or other loads.
 3. Set your electricity prices and shared nighttime hours under **Rates & time of use**.
 4. Add electricity meter-read intervals under **Utility bills** to define your reporting periods.
 5. Export a JSON backup regularly.
@@ -23,12 +23,11 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 - **Devices:** Enter active watts, standby watts, and a schedule, or record multiple measured kWh intervals. Standby runs outside active hours and is not counted twice.
 - **Schedules:** Run every day or on selected days, continuously or for specific hours. The Nighttime hours checkbox follows one shared winter/summer schedule configured on the rates page.
 - **One-time use:** Record EV charging or other occasional loads as total kWh, or use continuous watts between two dates. Delivered-energy entries can account for charging losses; measured wall energy is used directly.
-- **Rooms:** Add, rename, remove, and color rooms. Inventory headers show each room's average watts, total energy, and base grid cost.
+- **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the midpoint for cost ranges); headers show average watts, total energy, and base grid cost.
 - **Power sources:** Separate grid-powered, off-grid solar, and mixed/unallocated loads. Solar items have a panel icon and green background.
 - **Billing periods:** View a saved utility billing interval or usage since the current billing period began. Entries outside the selected period are hidden.
 - **Summary:** See grid kWh, solar kWh, average kWh/day, base grid energy cost, and estimated savings from solar.
-- **Safe merging:** Combine separate continuous idle and active device entries into one device with standby power, preserving existing estimates when active watts are additional power.
-- **Backups:** Export and restore validated JSON files containing records, rooms, rates, and settings.
+- **Backups:** Export and restore validated JSON files containing records, locations, rates, and settings.
 
 ## Rates and calculation boundaries
 

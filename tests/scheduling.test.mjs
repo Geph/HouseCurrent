@@ -43,7 +43,7 @@ test('merge preserves energy, peak and cost when existing active entry is extra 
 test('merge supports total measured active watts and rejects unrelated entries',()=>{
  const s=seedState();s.devices=[schedule({id:'idle',watts:12}),schedule({id:'active',watts:205,hours:3})]
  assert.equal(mergeIdleActive(s,'idle','active','Family',true).watts,205)
- s.devices=[schedule({id:'idle'}),schedule({id:'active',source:'solar'})];assert.throws(()=>mergeIdleActive(s,'idle','active','x'),/same room/)
+ s.devices=[schedule({id:'idle'}),schedule({id:'active',source:'solar'})];assert.throws(()=>mergeIdleActive(s,'idle','active','x'),/same location/)
  s.devices=[schedule({id:'idle',hours:6}),schedule({id:'active'})];assert.throws(()=>mergeIdleActive(s,'idle','active','x'),/continuously/)
 })
 test('read-only export embeds validated data safely and has no external assets',()=>{
