@@ -19,6 +19,7 @@ test('hosted build keeps server saves separate from offline storage and is valid
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'housecurrent-build-'))
  buildServer(dir)
  const app=fs.readFileSync(path.join(dir,'app.js'),'utf8')
+ const html=fs.readFileSync(path.join(dir,'index.html'),'utf8');assert.ok(!html.includes('class="topbar"'));assert.ok(html.includes('id="server-auth"'));assert.ok(html.indexOf('id="server-auth"')<html.indexOf('</aside>'))
  assert.ok(app.includes('const SERVER_BOOT=await serverAPI'))
  assert.ok(app.includes('await save()'));assert.ok(!app.includes("localStorage.setItem('housecurrent-v1'"))
  assert.ok(!app.includes("getItem('housecurrent-v1'"));assert.ok(app.includes('stopImmediatePropagation'))

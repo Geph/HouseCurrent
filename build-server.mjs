@@ -32,7 +32,7 @@ let state=validateState(SERVER_BOOT.state),storageOK=true,loadWarning='';
  replace('This replaces the data currently saved in this browser.', 'This replaces the shared household data on the server.')
  app+=`\n${read('server/client.js')}\n`
  let html=read('dist/index.html').replace('<span id="save-state">Saved on this device</span>','<span id="save-state">Loading server data…</span>')
- html=html.replace('<div class="save-state"><i>', '<div class="save-state"><button id="server-auth" class="btn small" type="button">Sign in to edit</button><i>')
+ html=html.replace('<div class="sidebar-bottom">', '<div class="sidebar-bottom"><button id="server-auth" class="backup-btn server-auth" type="button">Sign in to edit</button>')
  html=html.replace('Saved in this browser.<br>Export a backup to keep it safe.','Saved on the server.<br>Export a backup to keep it safe.')
  html=html.replace('<script type="module" src="app.js"></script>',`<script type="module">import('./app.js').catch(()=>{document.getElementById('content').textContent='Housecurrent could not load its server data. Check HTTPS and complete the server setup, then reload.'})</script>`)
  for(const [name,data]of Object.entries({'index.html':html,'app.js':app,'energy.js':read('dist/energy.js'),'styles.css':read('dist/styles.css'),'starter-state.json':JSON.stringify(seedState()),'api.php':read('server/api.php'),'store.php':read('server/store.php'),'setup.php':read('server/setup.php'),'.htaccess':read('server/.htaccess')}))fs.writeFileSync(path.join(output,name),data)
