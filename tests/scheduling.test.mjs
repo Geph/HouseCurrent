@@ -53,4 +53,3 @@ test('read-only export embeds validated data safely and has no external assets',
  const js=html.match(/<script type="module">([\s\S]*?)<\/script>/)[1];new Function(js)
  assert.ok(js.includes("if(READ_ONLY)throw new Error('This is a read-only snapshot.')"))
 })
-

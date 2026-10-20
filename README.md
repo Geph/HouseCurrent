@@ -86,3 +86,7 @@ Editable source files:
 | `tests/` | Regression tests |
 
 After editing the source, run the checks and rebuild `Housecurrent.html` before distributing it.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
