@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142e2b"><meta name="description" content="Understand your home energy. Track devices, seasonal electricity rates, and off-grid solar without guessing hourly production."><title>Housecurrent · Home energy</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23142e2b'/%3E%3Cpath d='M22 6L12 22h8l-2 12 12-18h-9z' fill='%23c7ed96'/%3E%3C/svg%3E"><style>:root{--ink:#213932;--muted:#74817b;--green:#27755a;--mint:#eaf1e9;--paper:#f7f8f4;--line:#e6e9e2;--gold:#d59c44;--nav:#142e2b;--red:#ad4638;font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-size:14px}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible{outline:3px solid #90b994;outline-offset:3px}input:focus,select:focus,textarea:focus{outline:2px solid #81ab84;outline-offset:1px}button svg,a svg{pointer-events:none}svg{display:block}button{border:0}small{font-size:12px}.app-shell{display:flex;min-height:100vh}.sidebar{background:var(--nav);color:#dee9e0;width:242px;min-width:242px;position:fixed;inset:0 auto 0 0;padding:35px 22px 20px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:10px;font-family:Manrope,sans-serif;font-size:21px;font-weight:750;letter-spacing:-.8px}.brand-icon{display:grid;place-items:center;background:#c9ed9c;color:#233d2c;border-radius:11px;width:36px;height:39px;font-size:34px;font-family:Georgia,serif}.brand-sub{display:block;font-family:'DM Sans',sans-serif;font-size:8px;letter-spacing:1.8px;color:#a3b7a7;margin-top:5px;font-weight:500}.home-label{display:flex;align-items:center;gap:10px;margin:38px 0 31px;border-bottom:1px solid #314842;padding-bottom:25px;font-weight:500}.home-label small{display:block;color:#90aaa0;font-size:10px;margin-top:5px}.house-mark{width:32px;height:32px;border:1px solid #41594d;border-radius:50%;display:grid;place-items:center;font-size:23px}.live-dot{width:6px;height:6px;border-radius:50%;background:#b8df91;margin-left:auto}.nav-label{font-size:9px;letter-spacing:1.8px;color:#809b8c;margin:0 12px 13px}nav{display:flex;flex-direction:column;gap:6px}nav a{display:flex;align-items:center;gap:12px;color:#abc0b3;border-radius:8px;padding:13px 14px;font-size:13px}nav a.active{background:#29473b;color:#d5efb7}nav a:hover{background:#28433a}nav a>span+span{margin-left:auto;font-size:11px;color:#c6dfaa}nav svg{width:17px;height:17px}.sidebar-bottom{margin-top:auto;padding-top:40px}.local-note{display:flex;gap:10px;font-size:12px;padding:15px 4px;color:#d7e5d4}.local-note>span{color:#bfdda3;font-size:22px}.local-note small{display:block;font-size:11px;color:#8fa999;line-height:1.7;margin-top:5px}.backup-btn{border:1px solid #405b4d;border-radius:7px;color:#c9dcca;background:none;padding:11px 12px;width:100%;text-align:left;font-size:12px}.backup-btn span{float:right}.sidebar .text-button{font-size:11px;color:#94b09c;margin:13px auto;display:block}main{width:calc(100% - 242px);margin-left:242px;min-width:0}.topbar{height:75px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 42px;background:#fcfcf9}.breadcrumb{font-size:12px;color:var(--muted)}.breadcrumb span{padding:0 14px;color:#bdc5bb}.breadcrumb strong{font-weight:500;color:#3b5045}.save-state{font-size:10px;display:flex;align-items:center;gap:7px;color:var(--muted)}.save-state i{height:5px;width:5px;background:#659979;border-radius:50%}.content{padding:35px 42px 25px;max-width:1530px;margin:auto}.eyebrow{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#7a8d79;font-weight:650;margin:0 0 9px}h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Manrope,system-ui,sans-serif}h1{font-size:31px;letter-spacing:-1.2px;line-height:1.2;font-weight:750;margin-bottom:10px}h2{font-size:16px;letter-spacing:-.4px;margin-bottom:5px}h3{font-size:14px;margin-bottom:7px;font-weight:700}.subtitle{color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:0}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px}.heading-actions{display:flex;align-items:center;gap:9px;flex-shrink:0}.btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;border-radius:7px;padding:11px 16px;min-height:39px;font-weight:600;font-size:12px;background:#fff;color:var(--ink);border:1px solid #dce2d7}.btn.primary{background:var(--green);color:white;border-color:var(--green)}.btn.primary:hover{background:#205e49}.btn:hover{filter:brightness(.97)}.btn svg{width:15px;height:15px}.btn.small{padding:8px 11px;min-height:32px;font-size:11px}.btn.danger{color:var(--red);background:#fff5f2;border-color:#ecd3ce}.text-button{background:none;color:var(--green);padding:0;font-size:11px;font-weight:550}.period-bar{display:flex;align-items:center;gap:15px;border:1px solid var(--line);background:#fff;padding:12px 16px;border-radius:9px;margin-bottom:23px}.period-bar>svg{width:16px;color:#6d8474}.period-label{font-size:11px;color:var(--muted)}.period-bar select{border:0;background:transparent;color:var(--ink);font-size:12px;max-width:240px;font-weight:600}.period-bar .badge{margin-left:auto}.date-pill{font-size:11px;color:#617365;display:flex;align-items:center;gap:8px}.badge{display:inline-flex;align-items:center;gap:5px;border-radius:4px;background:#edf2e9;color:#698358;font-size:9px;font-weight:600;letter-spacing:.2px;padding:5px 7px;white-space:nowrap}.badge.gold{background:#fcf1db;color:#99682a}.badge.blue{background:#edf0f7;color:#5b7294}.badge.gray{background:#f0f1ec;color:#758174}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:23px}.kpi{border:1px solid var(--line);border-radius:10px;background:#fff;padding:19px 19px 16px;min-height:151px}.kpi-top{display:flex;align-items:center;justify-content:space-between;color:#788579;font-size:11px;margin-bottom:21px}.kpi-top svg{width:17px;height:17px;color:#557361}.kpi-value{font-family:Manrope,sans-serif;font-size:29px;font-weight:750;letter-spacing:-1px;line-height:1;margin-bottom:11px}.kpi-value span{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;color:#8c9789;letter-spacing:0;margin-left:5px}.kpi small{font-size:10px;color:#8a9588}.kpi.solar{background:#ecf3e8;border-color:#dbe8d0}.kpi.solar .kpi-value{color:#4b713a}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,1fr);gap:20px;margin-bottom:23px}.card{background:white;border:1px solid var(--line);border-radius:10px;padding:22px;min-width:0}.card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:24px}.card-header p{font-size:11px;color:var(--muted);line-height:1.6;margin:6px 0 0}.card-header h2{margin-bottom:0}.bill-composition{display:flex;align-items:center;gap:27px;padding:8px 0 20px}.donut{width:165px;height:165px;min-width:165px;border-radius:50%;position:relative;background:conic-gradient(var(--gold) 0 var(--peak),#9fbe9d var(--peak) 100%);display:grid;place-items:center}.donut:before{content:'';position:absolute;inset:17px;background:white;border-radius:50%}.donut-center{position:relative;text-align:center}.donut-center strong{font-size:29px;font-family:Manrope,sans-serif;letter-spacing:-1px}.donut-center small{display:block;color:#8a9588;font-size:10px;margin-top:4px}.legend{flex:1}.legend-line{display:grid;grid-template-columns:8px 1fr auto;align-items:center;gap:9px;padding:13px 0;border-bottom:1px solid #f0f2eb;font-size:11px}.legend-line i{background:var(--gold);height:7px;width:7px;border-radius:2px}.legend-line.off i{background:#9fbe9d}.legend-line strong{font-size:13px}.legend-line small{color:#9ca495;font-size:10px}.insight{display:flex;align-items:flex-start;gap:10px;background:#f5f7f1;border-radius:7px;padding:12px;font-size:11px;color:#728067;line-height:1.65}.insight svg{width:16px;height:16px;min-width:16px;margin-top:1px}.solar-card{background:#f0f4e8;position:relative;overflow:hidden;border-color:#e1e8d5;display:flex;flex-direction:column}.solar-card .card-header{position:relative;margin-bottom:15px}.solar-art{position:absolute;right:0;top:0;width:140px;height:140px;opacity:.4;pointer-events:none}.solar-card h2{max-width:210px}.solar-card>p{font-size:12px;color:#768264;line-height:1.8;max-width:260px}.solar-card .btn{align-self:flex-start;margin-top:auto;background:#fffef7}.solar-stat{font-family:Manrope,sans-serif;font-size:30px;color:#51713a;font-weight:750;letter-spacing:-1px;margin:2px 0 10px}.solar-stat span{font-size:12px;letter-spacing:0;font-family:'DM Sans',sans-serif;font-weight:400}.solar-card .tiny{font-size:10px;color:#879173;line-height:1.7;margin:14px 0 0;max-width:100%}.section-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px}.section-row p{font-size:11px;color:var(--muted);margin:5px 0 0}.device-empty{display:flex;align-items:center;gap:19px;padding:20px 0 10px}.empty-icon{width:57px;height:57px;min-width:57px;border-radius:12px;background:#f0f4ec;display:grid;place-items:center;color:#77916a}.empty-icon svg{width:25px;height:25px}.device-empty h3{margin-bottom:5px}.device-empty p{color:var(--muted);font-size:11px;line-height:1.8;margin-bottom:0;max-width:470px}.device-empty .btn{margin-left:auto;white-space:nowrap}.next-step{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}.step-card{border-top:1px solid var(--line);padding-top:17px;display:flex;gap:10px}.step-num{width:21px;height:21px;min-width:21px;border:1px solid #dfe5d9;border-radius:50%;display:grid;place-items:center;font-size:10px;color:#80916f}.step-card strong{font-size:11px;font-weight:550}.step-card p{font-size:10px;color:#899381;margin:5px 0;line-height:1.6}.rate-strip{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px;font-size:11px;padding:16px 19px;border-radius:8px;background:#ecefe6;color:#667259}.rate-strip strong{font-size:11px;color:#4f6648}.rate-strip .text-button{white-space:nowrap}.dot{height:6px;width:6px;border-radius:50%;display:inline-block;background:var(--gold);margin-right:6px}.dot.off{background:#8ba97c}footer{padding:20px 42px 25px;border-top:1px solid var(--line);font-size:9px;color:#8e9a87;letter-spacing:1px;display:flex;gap:19px;align-items:center}footer span{font-size:10px;letter-spacing:0}footer button{margin-left:auto;letter-spacing:0}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;font-size:9px;letter-spacing:1px;color:#899480;font-weight:500;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:17px 12px;border-bottom:1px solid #edf0e8;vertical-align:middle}td strong{font-weight:550}td small{display:block;color:#8c9684;font-size:10px;margin-top:5px}td.right,th.right{text-align:right}.row-actions{display:flex;gap:10px;justify-content:flex-end}.no-data{padding:48px 20px;text-align:center;color:#85937a}.no-data .empty-icon{margin:0 auto 17px}.no-data h3{color:var(--ink)}.no-data p{font-size:12px;line-height:1.8;max-width:420px;margin:10px auto 20px}.notice{background:#f3f5ed;color:#78846c;border:1px solid #e1e7d7;padding:12px 15px;border-radius:8px;font-size:11px;line-height:1.8;margin-bottom:20px}.notice.warning{background:#fff5e5;border-color:#ead9b7;color:#8d713e}.stats-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}.split{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px}.meter-config{display:flex;gap:15px;align-items:flex-start;margin-top:20px;padding-top:18px;border-top:1px solid #dfe7d4}.meter-config p{font-size:11px;color:#79876b;line-height:1.7}.metric-large{font-size:35px;font-family:Manrope,sans-serif;font-weight:750;letter-spacing:-1px}.metric-large small{font-size:13px;letter-spacing:0;font-weight:400}.meter-trend{display:flex;align-items:flex-end;gap:10px;height:120px;margin:20px 0 8px}.trend-column{display:flex;align-items:center;justify-content:flex-end;flex-direction:column;flex:1;height:100%;gap:6px}.trend-column i{background:#94b17d;display:block;width:100%;max-width:36px;min-height:2px;border-radius:4px 4px 0 0}.trend-column span{font-size:9px;color:#839373}.charge-row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #edf0e8;padding:13px 0;font-size:12px}.charge-row.total{font-weight:700;font-size:15px;border:0}.bar{height:8px;border-radius:5px;overflow:hidden;display:flex;background:#edf0e8;margin:18px 0}.bar div{height:100%}.source-note{font-size:10px;line-height:1.8;color:#8b9583;margin:15px 0 0}.rate-table td{padding:19px 12px}.rate-table .price{font-family:Manrope,sans-serif;font-size:23px;letter-spacing:-.7px;font-weight:650}.rate-table .price small{display:inline;font-size:10px;font-weight:400;margin-left:2px}.season-title{color:#79866f;font-size:10px;text-transform:uppercase;letter-spacing:.8px}.schedule-grid{display:grid;grid-template-columns:50px repeat(24,1fr);gap:3px;align-items:center;margin:22px 0 12px}.schedule-grid span{font-size:9px;color:#7d8b72}.schedule-grid .slot{height:21px;background:#dce8d4;border-radius:2px}.schedule-grid .slot.peak{background:#ddb66c}.schedule-grid .hour{font-size:8px}.rate-key{font-size:10px;color:#839075;margin-top:15px}.rate-key span{margin-right:20px}.bill-card{margin-bottom:20px}.bill-card header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:12px}.bill-date{font-size:12px;color:#78846f}.bill-summary{display:flex;gap:40px;padding:15px 0}.bill-summary strong{font-family:Manrope,sans-serif;font-size:25px;letter-spacing:-.6px}.bill-summary small{display:block;font-size:10px;color:#8a9580;margin-bottom:8px}.custom-date{display:flex;gap:10px;align-items:center;font-size:11px}.custom-date input{max-width:140px;border:1px solid var(--line);padding:5px;border-radius:4px}.toggle-tabs{display:flex;background:#f0f2eb;border-radius:6px;padding:3px;margin-bottom:20px}.toggle-tabs button{flex:1;border-radius:5px;background:none;padding:9px 10px;font-size:12px;color:#819073}.toggle-tabs button.active{background:white;color:var(--ink);box-shadow:0 1px 5px #0000000b}dialog{width:min(560px,calc(100vw - 30px));max-height:90vh;border:1px solid #e1e7da;border-radius:14px;padding:0;box-shadow:0 30px 100px #0d282b33;color:var(--ink)}dialog::backdrop{background:#142e2b66;backdrop-filter:blur(3px)}.modal-inner{padding:28px}.modal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}.modal-top h2{font-size:22px}.close-btn{width:28px;height:28px;display:grid;place-items:center;background:#f0f3ec;color:#788572;border-radius:50%;font-size:19px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;font-size:11px;font-weight:550}.form-grid .field{margin-bottom:0}.field input,.field select,.field textarea{border:1px solid #dfe5d7;border-radius:6px;background:#fff;padding:11px 12px;width:100%;color:var(--ink);min-width:0}.field textarea{resize:vertical;min-height:70px}.field small{font-size:10px;color:#8c9682;line-height:1.7;font-weight:400}.form-actions{display:flex;justify-content:flex-end;gap:9px;border-top:1px solid var(--line);padding-top:20px;margin-top:22px}.form-error{color:var(--red);font-size:12px;background:#fcefeb;padding:11px;border-radius:6px;margin:10px 0}.form-error:empty{display:none}.days{display:flex;gap:6px;flex-wrap:wrap}.days label{position:relative;cursor:pointer}.days input{position:absolute;opacity:0;width:0}.days span{display:grid;place-items:center;border:1px solid #dfe5d8;border-radius:5px;width:33px;height:33px;color:#8a957f;font-size:11px}.days input:checked+span{color:#49723d;border-color:#afc09e;background:#eaf2e3}.days input:focus-visible+span{outline:2px solid #6e9665}.full{grid-column:1/-1}.form-section{font-size:10px;color:#86947a;margin:20px 0 13px;text-transform:uppercase;letter-spacing:1px}#toast{position:fixed;bottom:24px;left:calc(50% + 100px);transform:translateX(-50%);background:#234a3b;color:white;font-size:12px;border-radius:8px;box-shadow:0 8px 25px #0002;padding:14px 23px;z-index:1000;display:none;max-width:calc(100vw - 30px)}#toast.show{display:block}.delete-inline{color:var(--red)}.prose{font-size:12px;line-height:1.9;color:#718269}.prose h3{color:var(--ink);margin-top:20px}.compare{display:flex;justify-content:space-between;gap:15px;padding:15px;border-radius:7px;background:#f6f7f1;margin-top:17px;font-size:11px;line-height:1.8}.compare strong{display:block;font-family:Manrope,sans-serif;font-size:17px;color:var(--ink)}.progress{height:5px;background:#eff2ea;border-radius:5px;margin-top:7px;width:100%;min-width:80px;overflow:hidden}.progress i{display:block;height:100%;background:#99b98b;border-radius:5px}.icon-cell{display:flex;align-items:center;gap:11px}.device-icon{width:33px;height:33px;min-width:33px;border-radius:8px;background:#f1f4ed;color:#7e986d;display:grid;place-items:center}.device-icon svg{width:17px;height:17px}.pill-source{font-size:10px;color:#719256}.print-only{display:none}
+@media(min-width:1500px){.content{padding-top:43px}.kpi{padding:22px}.dashboard-grid{grid-template-columns:1.6fr 1fr}.donut{width:180px;height:180px;min-width:180px}.card{padding:25px}}@media(max-width:1150px){.sidebar{width:205px;min-width:205px;padding:28px 15px}.brand{font-size:18px}.brand-sub{font-size:7px}main{margin-left:205px;width:calc(100% - 205px)}.content{padding:28px 24px}.topbar{padding:0 24px}.bill-composition{gap:15px}.donut{width:125px;height:125px;min-width:125px}.donut:before{inset:13px}.kpi{padding:16px}.kpi-value{font-size:26px}.dashboard-grid{gap:15px;grid-template-columns:1.4fr 1fr}.card{padding:18px}.page-heading{align-items:flex-start}h1{font-size:27px}.heading-actions{flex-direction:column;align-items:stretch}.device-empty{flex-wrap:wrap}.device-empty .btn{margin-left:76px}.date-pill{display:none}.kpi small{line-height:1.6;display:block}.rate-strip{flex-wrap:wrap}footer{padding:20px 24px}}@media(max-width:850px){.sidebar{width:76px;min-width:76px;padding:25px 12px}.brand>span:last-child,.home-label,.nav-label,.sidebar-bottom,nav a>span{display:none}.brand{justify-content:center}nav{margin-top:35px}nav a{padding:15px;justify-content:center}.brand-icon{width:36px}main{margin-left:76px;width:calc(100% - 76px)}.kpis{grid-template-columns:repeat(2,1fr)}.dashboard-grid,.split{grid-template-columns:1fr}.solar-card{min-height:250px}.solar-card>p{max-width:500px}.solar-art{width:200px;height:200px}.solar-card h2{max-width:100%}.stats-3{grid-template-columns:1fr 1fr}.next-step{grid-template-columns:1fr}footer span{display:none}.period-bar{flex-wrap:wrap;gap:9px}.period-bar .badge{margin-left:0}.bill-composition{gap:35px}.donut{width:165px;height:165px;min-width:165px}}@media(max-width:540px){.sidebar{position:relative;width:100%;height:auto;min-width:0;flex-direction:row;justify-content:space-between;padding:12px 15px;align-items:center}.brand-icon{height:31px;width:29px;font-size:27px;border-radius:8px}nav{margin-top:0;flex-direction:row;gap:2px}nav a{padding:10px}nav svg{width:17px;height:17px}.app-shell{display:block}main{margin-left:0;width:100%}.topbar{height:48px;padding:0 17px}.content{padding:23px 17px}.save-state{font-size:8px}.page-heading{gap:10px;margin-bottom:20px}.heading-actions{max-width:140px}.heading-actions .btn{font-size:10px;padding:9px 11px;min-height:34px}h1{font-size:24px}.subtitle{font-size:11px}.kpis{gap:10px}.kpi{min-height:135px;padding:15px}.kpi-top{font-size:10px;margin-bottom:18px}.kpi-value{font-size:26px}.kpi small{font-size:9px}.period-bar{padding:11px}.period-label{font-size:10px}.period-bar select{font-size:11px;max-width:210px}.period-bar .badge{display:none}.custom-date{flex-wrap:wrap}.card{padding:18px}.bill-composition{gap:18px}.donut{height:132px;width:132px;min-width:132px}.donut-center strong{font-size:24px}.legend-line{font-size:10px;gap:6px}.legend-line strong{font-size:11px}.device-empty{gap:12px}.device-empty .empty-icon{width:40px;min-width:40px;height:40px}.device-empty .btn{margin-left:0}.device-empty>div:nth-child(2){width:calc(100% - 55px)}.rate-strip{gap:10px;font-size:10px}.stats-3{gap:10px}.stats-3 .kpi:last-child{grid-column:1/-1}.metric-large{font-size:28px}.rate-table .price{font-size:19px}.rate-table td{padding:15px 7px}.rate-table th{font-size:8px;padding:10px 6px}.bill-summary{gap:20px}.bill-summary strong{font-size:22px}.form-grid{gap:12px}.modal-inner{padding:21px}.schedule-grid{gap:2px;grid-template-columns:37px repeat(24,1fr)}.schedule-grid .hour{font-size:7px}.schedule-grid .slot{height:17px}.schedule-grid span{font-size:8px}footer{padding:20px 17px;gap:10px}footer button{font-size:9px}#toast{left:50%;width:max-content;max-width:90vw}.rate-table .price small{display:block}}
+
+footer{flex-wrap:wrap}footer .footer-backups{display:flex;gap:14px;margin-left:auto}footer .footer-backups button{margin-left:0}@media(max-width:540px){footer .footer-backups{width:100%;justify-content:flex-end;margin-top:5px}}
+
+.location-heading th{background:#f4f6f0;padding:14px 12px;color:#4c6454;font-size:12px;letter-spacing:0;font-weight:650;border-top:1px solid var(--line);text-align:left}
+.location-heading .badge{margin-left:7px;vertical-align:middle}
+tr.solar-device>td{background:#f0f7e9;border-bottom-color:#dfead5}
+.solar-device .device-icon{background:#e0edcf;color:#547d3d}
+.solar-device .badge.gray{background:#e3efd8;color:#54763f}
+
+.day-selection-header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.all-week{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:400}.field .all-week input{width:15px;height:15px;padding:0;margin:0;accent-color:var(--green)}
+
+.badge.one-time,.solar-device .badge.one-time{background:#f5e7d0;color:#845015;border:1px solid #e4c58e}
+.location-heading th{border-left:4px solid var(--room-color,#899480);background:color-mix(in srgb,var(--room-color,#899480) 10%,white)}
+.room-dot{display:inline-block;width:10px;height:10px;min-width:10px;border-radius:50%;margin-right:9px;vertical-align:middle}
+.room-list{margin-bottom:24px;max-height:40vh;overflow:auto}.room-item{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.room-item .room-dot{margin:0}.room-item strong{font-size:12px;flex:1}.room-item small{font-size:10px;color:var(--muted);white-space:nowrap}.room-editor{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:15px}.room-editor input[type=color]{height:40px;padding:4px}.heading-actions{flex-wrap:wrap}
+
+.location-heading th{border-left:0}.location-heading th:first-child{border-left:4px solid var(--room-color,#899480)}.location-heading th.right{text-align:right}.room-total{font-variant-numeric:tabular-nums;white-space:nowrap}.room-total small{display:block;font-size:9px;font-weight:400;color:#6c796b;margin-top:5px;letter-spacing:0}
+
+.device-kpis{grid-template-columns:repeat(5,minmax(0,1fr))}@media(max-width:1150px){.device-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:850px){.device-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.bill-context{display:flex;gap:22px;align-items:center;justify-content:space-between;padding:15px 19px;margin-bottom:20px;border:1px solid var(--line);border-radius:9px;background:#fff}.bill-context strong{display:block;font-size:13px}.bill-context small{display:block;font-size:10px;color:var(--muted);margin:4px 0}.bill-context a{white-space:nowrap}@media(max-width:700px){.bill-context{flex-wrap:wrap;justify-content:flex-start;gap:16px 24px}}
+
+[hidden]{display:none!important}.night-check{display:block;padding:12px;background:#f1f6eb;border-radius:8px}.night-check input{width:auto;margin-right:8px}.night-check small{display:block;margin:5px 0 0 24px;color:var(--muted)}[data-fields]>.field{margin-bottom:16px}.night-settings{margin-top:20px}.heading-actions{flex-wrap:wrap}details summary{cursor:pointer;margin:12px 0;color:#57736a}
+</style></head>
+<body><div class="app-shell">
+<aside class="sidebar"><a class="brand" href="#devices" aria-label="Housecurrent devices"><span class="brand-icon">ϟ</span><span>housecurrent<span class="brand-sub">YOUR HOME, IN BALANCE</span></span></a><div class="home-label"><span class="house-mark">⌂</span><div>My household<small>Mountain Time · Colorado</small></div><span class="live-dot"></span></div><div class="nav-label">WORKSPACE</div><nav aria-label="Main navigation"><a href="#devices" data-view="devices"></a><a href="#bills" data-view="bills"></a><a href="#rates" data-view="rates"></a></nav><div class="sidebar-bottom"><div class="local-note"><span>◈</span><div>Your energy journal<small>Saved in this browser.<br>Export a backup to keep it safe.</small></div></div><button class="backup-btn" id="export-side">Export backup <span>↗</span></button><button class="text-button muted" id="import-side">Restore backup</button></div></aside>
+<main><header class="topbar"><span class="breadcrumb">My household <span>/</span> <strong id="crumb">Overview</strong></span><div class="save-state"><i></i> <span id="save-state">Saved on this device</span></div></header><div id="content" class="content"></div><footer>HOUSECURRENT <span>Measured where possible. Estimated where necessary.</span><button id="about-button" class="text-button">How the numbers work ↗</button><div class="footer-backups"><button id="export-footer" class="text-button">Export backup</button><button id="import-footer" class="text-button">Restore backup</button></div></footer></main></div>
+<dialog id="modal"><div id="modal-body"></div></dialog><div id="toast" role="status" aria-live="polite"></div><input type="file" id="backup-file" accept="application/json,.json" hidden>
+<script type="module">const DAY = 86400000
+const DEFAULT_RATES = { summerPeak: .21277, summerOff: .07884, winterPeak: .18331, winterOff: .06792, summerFlat: .10380, winterFlat: .08570 }
+function dateMs(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? '')) throw new Error('Enter a valid date.')
+  const n = Date.parse(value + 'T00:00:00Z')
+  if (!Number.isFinite(n) || new Date(n).toISOString().slice(0, 10) !== value) throw new Error('Enter a valid date.')
+  return n
+}
+function iso(n) { return new Date(n).toISOString().slice(0, 10) }
+function dates(start, end) {
+  const a = dateMs(start), b = dateMs(end)
+  if (b <= a || b - a > DAY * 3660) throw new Error('The ending read date must be after the starting date (up to 10 years).')
+  return Array.from({length: (b-a)/DAY}, (_, i) => a + i*DAY)
+}
+function season(ms) { const m = new Date(ms).getUTCMonth(); return m >= 5 && m <= 8 ? 'summer' : 'winter' }
+function isPeak(ms) { const d = new Date(ms); return d.getUTCDay() > 0 && d.getUTCDay() < 6 && d.getUTCHours() >= 17 && d.getUTCHours() < 21 }
+function rateAt(ms, rates, flat = false) { return rates[season(ms) + (flat ? 'Flat' : isPeak(ms) ? 'Peak' : 'Off')] }
+function num(n, label, min = 0, max = 1e9) { const v = Number(n); if (n === '' || n == null || !Number.isFinite(v) || v < min || v > max) throw new Error(`${label} must be between ${min} and ${max}.`); return v }
+function rateBounds(start, end, rates, bucket) {
+  const values = dates(start, end).flatMap((ms) => {
+    const s = season(ms), weekday = new Date(ms).getUTCDay()
+    if (bucket === 'off') return [rates[s+'Off']]
+    if (bucket === 'peak') return weekday > 0 && weekday < 6 ? [rates[s+'Peak']] : []
+    return weekday > 0 && weekday < 6 ? [rates[s+'Off'], rates[s+'Peak']] : [rates[s+'Off']]
+  })
+  if (!values.length) throw new Error('There are no on-peak hours in this interval.')
+  return { min: Math.min(...values), max: Math.max(...values) }
+}
+/** Unknown timing is a range, never an invented hourly solar profile. */
+function energyValue(kwh, start, end, rates, peakKwh = null) {
+  const energy = num(kwh, 'Energy')
+  if (peakKwh == null) { const r = rateBounds(start, end, rates); return { low: energy*r.min, high: energy*r.max } }
+  const p = num(peakKwh, 'On-peak energy', 0, energy), off = rateBounds(start, end, rates, 'off')
+  const peak = p ? rateBounds(start, end, rates, 'peak') : {min:0,max:0}
+  return { low: p*peak.min+(energy-p)*off.min, high: p*peak.max+(energy-p)*off.max }
+}
+/** User-selected average avoided energy prices for solar loads recorded as kWh. */
+const SOLAR_AVERAGE_RATES = {winter:.08,summer:.10}
+function solarAverageValue(kwh,start,end) {
+  const energy=num(kwh,'Solar energy'),prices=dates(start,end).map(day=>SOLAR_AVERAGE_RATES[season(day)])
+  return {low:energy*Math.min(...prices),high:energy*Math.max(...prices)}
+}
+/** One-time use: delivered kWh / efficiency = energy drawn from the supply. */
+function validateEvent(d) {
+  dates(d.start,d.end)
+  if(d.inputMode!=null&&!['kwh','continuous'].includes(d.inputMode))throw new Error('Choose total kWh or continuous watts.')
+  if(d.inputMode==='continuous'){
+    if(typeof d.watts!=='number')throw new Error('Continuous watts must be a number.')
+    num(d.watts,'Continuous watts',0,1000000)
+    d.kwh=d.watts/1000*dates(d.start,d.end).length*24
+  }
+  if(typeof d.kwh!=='number'||typeof d.efficiency!=='number') throw new Error('Event energy and efficiency must be numbers.')
+  num(d.kwh,'Event kWh'); num(d.efficiency,'Delivered share',.1,100)
+  if(!['wall','delivered'].includes(d.basis)||!['unknown','off','peak'].includes(d.timing)) throw new Error('Choose a valid energy measurement and timing.')
+  eventValue(d,DEFAULT_RATES)
+  return d
+}
+function eventValue(d,rates) {
+  if(d.inputMode==='continuous')return continuousEventEnergy(d,d.start,d.end,rates)
+  const kwh=d.basis==='delivered'?d.kwh/(d.efficiency/100):d.kwh
+  const peak=d.timing==='peak'?kwh:d.timing==='off'?0:null
+  return {kwh,peak,...energyValue(kwh,d.start,d.end,rates,peak)}
+}
+function validateDevice(d) {
+  if (!String(d.name ?? '').trim()) throw new Error('Give the device a name.')
+  if (!['schedule','measured','event'].includes(d.mode) || !['grid','solar','mixed'].includes(d.source)) throw new Error('Choose a valid measurement method and energy source.')
+  if(d.mode!=='schedule'&&d.watts!=null){if(typeof d.watts!=='number')throw new Error('Watts must be a number.');num(d.watts,'Watts',0,1000000)}
+  if (d.mode === 'event') { validateEvent(d); return d }
+  if (d.mode === 'schedule') {
+    num(d.watts,'Watts',0,1000000); num(d.hours,'Hours per run',.01,24)
+    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(d.startTime ?? '')) throw new Error('Enter a valid start time.')
+    if(d.nightTime!=null&&typeof d.nightTime!=='boolean')throw new Error('Nighttime setting must be a checkbox value.')
+    if(d.idleWatts!=null){if(typeof d.idleWatts!=='number')throw new Error('Idle watts must be a number.');num(d.idleWatts,'Idle watts',0,d.watts)}
+    // Legacy backups: fold the old duty fraction into average watts once.
+    if(d.duty!==undefined){
+      if(typeof d.duty!=='number')throw new Error('Legacy duty cycle must be a number.')
+      const fraction=num(d.duty,'Legacy duty cycle',.1,100)/100,idle=d.idleWatts??0
+      d.watts=idle+(d.watts-idle)*fraction
+      delete d.duty
+    }
+    if(d.summerStartTime!=null||d.summerHours!=null){
+      if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(d.summerStartTime??''))throw new Error('Enter a valid summer start time.')
+      if(typeof d.summerHours!=='number')throw new Error('Summer hours must be a number.')
+      num(d.summerHours,'Summer hours',.01,24)
+    }
+    if (!Array.isArray(d.days) || !d.days.length || d.days.some(x=>!Number.isInteger(x)||x<0||x>6)) throw new Error('Select at least one valid day.')
+  } else {
+    const logs = d.logs ?? [d]
+    if(!Array.isArray(logs)||logs.length>10000) throw new Error('Invalid device readings.')
+    for(const log of logs){dates(log.start,log.end);num(log.kwh,'Measured kWh');if(log.peakKwh!=null)num(log.peakKwh,'Peak kWh',0,log.kwh)}
+    const ordered=[...logs].sort((a,b)=>a.start.localeCompare(b.start))
+    for(let i=1;i<ordered.length;i++) if(ordered[i].start<ordered[i-1].end) throw new Error('Device reading intervals cannot overlap.')
+  }
+  return d
+}
+/** Calendar timestamps encode household wall time, unaffected by the browser timezone. */
+function deviceEnergy(d, start, end, rates,nightHours=DEFAULT_NIGHT_HOURS) {
+  const days = dates(start,end), a = dateMs(start), b = dateMs(end)
+  if (d.mode === 'event') {
+    if(d.inputMode==='continuous')return continuousEventEnergy(d,start,end,rates)
+    const included=d.start>=start&&d.end<=end
+    const raw=eventValue(d,rates)
+    const v=d.source==='solar'?{...raw,...solarAverageValue(raw.kwh,d.start,d.end)}:raw
+    const flats=[...new Set(dates(d.start,d.end).map(t=>rates[season(t)+'Flat']))]
+    return {kwh:included?v.kwh:0,peak:included?v.peak:0,low:included?v.low:0,high:included?v.high:0,flat:included?(flats.length===1?v.kwh*flats[0]:null):0,measured:false,excluded:!included&&d.start<end&&d.end>start}
+  }
+  if (d.mode === 'measured') {
+    let result={kwh:0,peak:0,low:0,high:0,flat:0,excluded:false,measured:true}
+    for(const log of d.logs ?? [d]) {
+      const s=dateMs(log.start),e=dateMs(log.end)
+      if(s<a||e>b){if(e>a&&s<b)result.excluded=true;continue}
+      const value=d.source==='solar'?solarAverageValue(log.kwh,log.start,log.end):energyValue(log.kwh,log.start,log.end,rates,log.peakKwh)
+      const flats=[...new Set(dates(log.start,log.end).map(t=>rates[season(t)+'Flat']))]
+      result.kwh+=+log.kwh;result.peak=result.peak==null||log.peakKwh==null?null:result.peak+log.peakKwh
+      result.low+=value.low;result.high+=value.high
+      result.flat=result.flat==null||flats.length!==1?null:result.flat+log.kwh*flats[0]
+    }
+    return result
+  }
+  let kwh=0, peak=0, cost=0, flat=0
+  const idle=d.idleWatts??0
+  // Standby runs all day, including days without an active run. Active use adds only the difference.
+  if(idle) for(const day of days) for(let hour=0;hour<24;hour++){
+    const at=day+hour*3600000,energy=idle/1000
+    kwh+=energy;if(isPeak(at))peak+=energy
+    cost+=energy*rateAt(at,rates);flat+=energy*rateAt(at,rates,true)
+  }
+  // Include yesterday's overnight run, then price each interval on its actual day.
+  for (const day of [a-DAY,...days]) {
+    if (!d.days.includes(new Date(day).getUTCDay())) continue
+    const summer=season(day)==='summer'&&d.summerStartTime!=null
+    const night=d.nightTime?nightSchedule(nightHours,season(day)):null
+    const [h,m]=(night?night.startTime:summer?d.summerStartTime:d.startTime).split(':').map(Number)
+    const hours=night?night.hours:summer?d.summerHours:d.hours
+    const begin = day+(h*60+m)*60000, finish=begin+hours*3600000
+    let at = Math.max(a,begin), until=Math.min(b,finish)
+    while(at < until) {
+      const next = Math.min(until,(Math.floor(at/3600000)+1)*3600000)
+      const energy=(d.watts-idle)/1000*(next-at)/3600000
+      kwh+=energy; if(isPeak(at)) peak+=energy
+      cost+=energy*rateAt(at,rates); flat+=energy*rateAt(at,rates,true); at=next
+    }
+  }
+  return {kwh,peak,low:cost,high:cost,flat,measured:false,excluded:false}
+}
+function solarIntervals(readings) {
+  const sorted = [...readings].sort((a,b)=>a.date.localeCompare(b.date))
+  const intervals=[]
+  sorted.forEach((r,i)=>{
+    dateMs(r.date); num(r.kwh,'Meter kWh')
+    if(i && sorted[i-1].date===r.date) throw new Error('Use one cumulative reading per date. Edit the existing reading instead.')
+    if(i && !r.reset && r.kwh<sorted[i-1].kwh) throw new Error('Cumulative readings cannot decrease. If the meter was reset, mark this reading as a new baseline.')
+    if(i && !r.reset) intervals.push({start:sorted[i-1].date,end:r.date,kwh:r.kwh-sorted[i-1].kwh})
+  })
+  return intervals
+}
+function solarSummary(state,start,end) {
+  dates(start,end)
+  const intervals=solarIntervals(state.solarReadings), included=intervals.filter(r=>r.start>=start&&r.end<=end)
+  const partial=intervals.filter(r=>r.start<end&&r.end>start&&!included.includes(r)).length
+  const measured=included.reduce((s,r)=>s+r.kwh,0)
+  const factor=state.solar.kind==='ac'?1:state.solar.efficiency==null?null:state.solar.efficiency/100
+  let low=0,high=0
+  if(factor!=null) for (const r of included) {const v=energyValue(r.kwh*factor,r.start,r.end,state.rates);low+=v.low;high+=v.high}
+  return { measured,delivered:factor==null?null:measured*factor,low,high,partial,intervals:included,totalIntervals:intervals.length }
+}
+function validateState(s) {
+  if (s?.version!==1 || !s.rates || !Array.isArray(s.devices) || !Array.isArray(s.bills) || !Array.isArray(s.solarReadings) || !s.solar) throw new Error('Choose a Housecurrent backup (version 1).')
+  ensureNightHours(s)
+  const numeric=(v,label,min=0,max=1e9)=>{if(typeof v!=='number')throw new Error(label+' must be a number.');return num(v,label,min,max)}
+  const text=(v,label,limit=500)=>{if(typeof v!=='string'||v.length>limit)throw new Error(label+' must be valid text.');return v}
+  for (const key of Object.keys(DEFAULT_RATES)) numeric(s.rates[key],'Energy rate',0,10)
+  if(s.devices.length>1000 || s.bills.length>1000 || s.solarReadings.length>10000) throw new Error('This backup is too large.')
+  for(const d of s.devices) {
+    text(d.name,'Device name',100);if(d.room!=null)text(d.room,'Room',80);if(d.note!=null)text(d.note,'Device note')
+    validateDevice(d)
+    if(d.mode==='schedule'){numeric(d.watts,'Watts');numeric(d.hours,'Hours',.01,24)}
+    else if(d.mode==='measured') for(const log of d.logs??[d]){numeric(log.kwh,'Device kWh');if(log.peakKwh!=null)numeric(log.peakKwh,'Peak kWh',0,log.kwh)}
+  }
+  for(const b of s.bills){
+    dates(b.start,b.end);numeric(b.kwh,'Bill kWh');numeric(b.peakKwh,'Bill peak kWh',0,b.kwh);numeric(b.total,'Electric bill');if(b.energy!=null)numeric(b.energy,'Base energy charges',0,b.total)
+    if(b.statement)dateMs(b.statement);if(b.provider!=null)text(b.provider,'Utility',100);if(b.note!=null)text(b.note,'Bill note')
+    if(b.segments!=null){if(!Array.isArray(b.segments)||b.segments.length>50)throw new Error('Invalid bill segments.');for(const seg of b.segments){text(seg.label,'Segment label',100);numeric(seg.kwh,'Segment kWh');numeric(seg.rate,'Segment rate',0,10);numeric(seg.charge,'Segment charge')}if(Math.abs(b.segments.reduce((n,x)=>n+x.kwh,0)-b.kwh)>.05||b.energy==null||Math.abs(b.segments.reduce((n,x)=>n+x.charge,0)-b.energy)>.05)throw new Error('Bill line items must match the totals.')}
+  }
+  if(!['ac','dc','unknown'].includes(s.solar.kind)) throw new Error('Choose a valid solar meter location.')
+  text(s.solar.name,'Solar meter name',100)
+  if(s.solar.efficiency!=null)numeric(s.solar.efficiency,'Delivered share',.1,100)
+  for(const r of s.solarReadings){numeric(r.kwh,'Solar counter');if(r.note!=null)text(r.note,'Solar note')}
+  solarIntervals(s.solarReadings)
+  for(const list of [s.devices,s.bills,s.solarReadings]) { const ids=new Set();for(const r of list){if(typeof r.id!=='string'||ids.has(r.id))throw new Error('Records need unique IDs.');ids.add(r.id)} }
+  return ensureRooms(s)
+}
+function seedState() { return {
+  version:1, rates:{...DEFAULT_RATES},devices:[],solarReadings:[],rooms:defaultRooms(),nightHours:{...DEFAULT_NIGHT_HOURS},
+  solar:{name:'Off-grid AC output meter',kind:'ac',efficiency:null},
+  bills:[{id:'bill-2026-10',start:'2026-09-15',end:'2026-10-14',kwh:771,peakKwh:126,total:150.27,energy:72.47,statement:'2026-10-16',provider:'Xcel Energy',note:'Entered from your October 16 bill. Electricity only; gas excluded. Reading interval: 29 days.',segments:[{label:'Summer on-peak',kwh:65.17,rate:.21277,charge:13.87},{label:'Winter on-peak',kwh:60.83,rate:.18331,charge:11.15},{label:'Summer off-peak',kwh:333.62,rate:.07884,charge:26.30},{label:'Winter off-peak',kwh:311.38,rate:.06792,charge:21.15}]}]
+} }
+
+/** Source totals describe tracked loads; the solar meter journal is not added again. */
+function usageSummary(state,start,end) {
+  const items=state.devices.map(d=>({d,...deviceEnergy(d,start,end,state.rates,state.nightHours)}))
+  const grid=items.filter(x=>x.d.source==='grid'),solar=items.filter(x=>x.d.source==='solar'),mixed=items.filter(x=>x.d.source==='mixed')
+  const total=(rows,key)=>rows.reduce((n,x)=>n+x[key],0)
+  const totalKwh=total(items,'kwh'),averageKwhPerDay=totalKwh/dates(start,end).length
+  return {items,grid,solar,mixed,totalKwh,averageKwhPerDay,kwh:total(grid,'kwh'),low:total(grid,'low'),high:total(grid,'high'),solarKwh:total(solar,'kwh'),solarLow:total(solar,'low'),solarHigh:total(solar,'high'),mixedKwh:total(mixed,'kwh')}
+}
+
+const ROOM_COLORS=['#6578b8','#b88049','#5b9680','#976ab0','#bf6b80','#5899ae','#9b9346','#6f8e54']
+const roomKey=name=>String(name??'').trim().replace(/\s+/g,' ').toLowerCase()
+function nextRoomColor(rooms) {
+  const used=new Set(rooms.map(r=>r.color.toLowerCase()))
+  for(const color of ROOM_COLORS)if(!used.has(color))return color
+  for(let i=0;i<1000;i++){const color='#'+((0x426895+i*0x17a5b7)%0x1000000).toString(16).padStart(6,'0');if(!used.has(color))return color}
+  throw new Error('No room colors available.')
+}
+function defaultRooms(){return ['Bedroom','Office','Family room','Garage','Kitchen','Driveway'].map((name,i)=>({id:'room-'+(i+1),name,color:ROOM_COLORS[i]}))}
+function ensureRooms(s) {
+  if(s.rooms===undefined){
+    s.rooms=defaultRooms()
+    for(const d of s.devices){const name=String(d.room??'').trim().replace(/\s+/g,' ');if(name&&!s.rooms.some(r=>roomKey(r.name)===roomKey(name)))s.rooms.push({id:'room-'+(s.rooms.length+1),name:name[0].toUpperCase()+name.slice(1),color:nextRoomColor(s.rooms)})}
+  }
+  validateRooms(s.rooms)
+  for(const d of s.devices){if(!roomKey(d.room))continue;const room=s.rooms.find(r=>roomKey(r.name)===roomKey(d.room));if(!room)throw new Error('Choose a defined room for '+d.name+'.');d.room=room.name}
+  return s
+}
+function validateRooms(rooms) {
+  if(!Array.isArray(rooms)||rooms.length>200)throw new Error('Invalid room list (up to 200 rooms).')
+  const ids=new Set(),names=new Set(),colors=new Set()
+  for(const r of rooms){
+    if(typeof r?.id!=='string'||!r.id||r.id.length>100||ids.has(r.id))throw new Error('Rooms need unique IDs.')
+    if(typeof r.name!=='string'||!roomKey(r.name)||r.name.length>80||names.has(roomKey(r.name))||roomKey(r.name)==='unassigned room')throw new Error('Use a unique room name (up to 80 characters).')
+    if(typeof r.color!=='string'||!/^#[0-9a-f]{6}$/i.test(r.color)||colors.has(r.color.toLowerCase()))throw new Error('Each room needs a unique color.')
+    ids.add(r.id);names.add(roomKey(r.name));colors.add(r.color.toLowerCase())
+  }
+  return rooms
+}
+function updateRoom(s,id,name,color){
+  name=name.trim().replace(/\s+/g,' ');const previous=s.rooms.find(r=>r.id===id)
+  const room={id:id||'room-new',name,color:color.toLowerCase()}
+  const rooms=previous?s.rooms.map(r=>r.id===id?room:r):[...s.rooms,room]
+  validateRooms(rooms)
+  if(previous)for(const d of s.devices)if(roomKey(d.room)===roomKey(previous.name))d.room=name
+  s.rooms=rooms;return room
+}
+function removeRoom(s,id){const room=s.rooms.find(r=>r.id===id);if(!room)throw new Error('Room not found.');for(const d of s.devices)if(roomKey(d.room)===roomKey(room.name))d.room='';s.rooms=s.rooms.filter(r=>r.id!==id)}
+
+function roomUsage(items){
+  const totals=new Map()
+  for(const x of items){const key=roomKey(x.d.room);if(!totals.has(key))totals.set(key,{kwh:0,gridLow:0,gridHigh:0,solarLow:0,solarHigh:0,mixedKwh:0,count:0})
+    const r=totals.get(key);r.count++;r.kwh+=x.kwh
+    if(x.d.source==='grid'){r.gridLow+=x.low;r.gridHigh+=x.high}
+    else if(x.d.source==='solar'){r.solarLow+=x.low;r.solarHigh+=x.high}
+    else r.mixedKwh+=x.kwh
+  }
+  return totals
+}
+
+/** Saved bill intervals plus the current billing cycle through today, inclusive. */
+function reportingPeriod(bills,today,selection='current') {
+  const at=dateMs(today)
+  const chosen=bills.find(b=>b.id===selection)
+  if(chosen)return {id:chosen.id,start:chosen.start,end:chosen.end,anchored:true}
+  const active=bills.filter(b=>dateMs(b.start)<=at&&dateMs(b.end)>at).sort((a,b)=>b.start.localeCompare(a.start))[0]
+  const previous=bills.filter(b=>dateMs(b.end)<=at).sort((a,b)=>b.end.localeCompare(a.end))[0]
+  return {id:'current',start:active?.start??previous?.end??today,end:iso(at+DAY),anchored:!!(active||previous)}
+}
+
+/** Inventory visibility follows the same whole-interval reporting boundary as totals. */
+function periodItems(items,start,end){return items.filter(x=>{
+  const d=x.d
+  if(d.mode==='event')return d.inputMode==='continuous'?d.start<end&&d.end>start:d.start>=start&&d.end<=end
+  if(d.mode==='measured')return (d.logs??[d]).some(log=>log.start>=start&&log.end<=end)
+  return x.kwh>0
+})}
+
+const DEFAULT_NIGHT_HOURS={winterStart:'18:00',winterEnd:'00:00',summerStart:'19:30',summerEnd:'00:00'}
+function nightSchedule(config,which){
+  const startTime=config[which+'Start'],endTime=config[which+'End']
+  const minutes=t=>{if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(t??''))throw new Error('Enter a valid nighttime start and end.');const[h,m]=t.split(':').map(Number);return h*60+m}
+  const duration=(minutes(endTime)-minutes(startTime)+1440)%1440
+  if(!duration)throw new Error('Nighttime start and end must differ.')
+  return {startTime,hours:duration/60}
+}
+function ensureNightHours(s){
+  if(s.nightHours===undefined){
+    s.nightHours={...DEFAULT_NIGHT_HOURS}
+    for(const d of s.devices)if(d.mode==='schedule'&&d.startTime==='18:00'&&d.hours===6&&d.summerStartTime==='19:30'&&d.summerHours===4.5)d.nightTime=true
+  }
+  if(!s.nightHours||typeof s.nightHours!=='object')throw new Error('Invalid nighttime settings.')
+  nightSchedule(s.nightHours,'winter');nightSchedule(s.nightHours,'summer')
+  return s
+}
+function continuousEventEnergy(d,start,end,rates){
+  const a=d.start>start?d.start:start,b=d.end<end?d.end:end
+  const result={kwh:0,peak:0,low:0,high:0,flat:0,measured:false,excluded:false}
+  if(a>=b)return result
+  for(const day of dates(a,b))for(let h=0;h<24;h++){
+    const at=day+h*3600000,kwh=d.watts/1000
+    result.kwh+=kwh;if(isPeak(at))result.peak+=kwh
+    result.low+=kwh*(d.source==='solar'?SOLAR_AVERAGE_RATES[season(at)]:rateAt(at,rates))
+    result.flat+=kwh*rateAt(at,rates,true)
+  }
+  result.high=result.low
+  return result
+}
+function mergeIdleActive(s,idleId,activeId,name,activeIsTotal=false){
+  const idle=s.devices.find(d=>d.id===idleId),active=s.devices.find(d=>d.id===activeId)
+  if(!idle||!active||idle===active)throw new Error('Choose two different devices.')
+  if(idle.mode!=='schedule'||active.mode!=='schedule'||roomKey(idle.room)!==roomKey(active.room)||idle.source!==active.source)throw new Error('Both entries must be scheduled devices in the same room and on the same power source.')
+  if(idle.hours!==24||idle.nightTime||idle.summerStartTime||(idle.idleWatts??0)!==0||!Array.from({length:7},(_,i)=>i).every(i=>idle.days.includes(i))||(active.idleWatts??0)!==0)throw new Error('The idle entry must run continuously all week, and neither entry may already have standby.')
+  const merged={...active,name:name.trim(),idleWatts:idle.watts,watts:activeIsTotal?active.watts:idle.watts+active.watts}
+  validateDevice(merged)
+  s.devices=s.devices.filter(d=>d.id!==idleId).map(d=>d.id===activeId?merged:d)
+  return merged
+}
+
+
+const $ = (s, root=document) => root.querySelector(s)
+const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(n)
+const fmt = (n,p=1) => new Intl.NumberFormat('en-US',{maximumFractionDigits:p}).format(n)
+const dateLabel = (s,year=false) => new Date(dateMs(s)).toLocaleDateString('en-US',{month:'short',day:'numeric',...(year?{year:'numeric'}:{}),timeZone:'UTC'})
+const today = () => new Intl.DateTimeFormat('en-CA',{timeZone:'America/Denver',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())
+const uid = () => crypto.randomUUID()
+const paths = {
+  overview:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  solarPanel:'<path d="M5 10h14l3 10H2l3-10Zm7 0v10M4 15h16m-8 5v3m-4 0h8"/><circle cx="12" cy="4" r="2"/><path d="M12 0v1M5 4h2m10 0h2M7 0l1 1m9-1-1 1"/>',
+  devices:'<path d="M8 3v5m8-5v5M6 8h12v3a6 6 0 0 1-12 0V8Zm6 9v5"/>',
+  solar:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>',
+  bills:'<path d="M6 3h12v19l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6m-6 4h3"/>',
+  rates:'<path d="m4 18 5-5 4 3 7-11M15 5h5v5"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/>',
+  arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+  grid:'<path d="m8 2-4 20m12-20 4 20M7 6h10M6 11h12M5 16h14M12 2v20"/>',
+  export:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
+}
+const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.devices}</svg>`
+const titles={devices:'Devices',bills:'Utility bills',rates:'Rates & time of use'}
+const PUBLISHED_STATE=null
+const READ_ONLY=PUBLISHED_STATE!==null
+let state, storageOK=true, loadWarning=''
+try { const saved=READ_ONLY?null:localStorage.getItem('housecurrent-v1');state=READ_ONLY?validateState(structuredClone(PUBLISHED_STATE)):saved?validateState(JSON.parse(saved)):seedState() }
+catch(e){state=seedState();storageOK=false;loadWarning='Stored data could not be loaded. Restore an exported backup, or export the current state before making changes. '+e.message}
+let periodChoice='current'
+try{periodChoice=localStorage.getItem('housecurrent-period-v1')||'current'}catch{}
+let period=reportingPeriod(state.bills,today(),periodChoice)
+function selectPeriod(choice){period=reportingPeriod(state.bills,today(),choice);periodChoice=period.id;try{localStorage.setItem('housecurrent-period-v1',periodChoice)}catch{}}
+let view='devices', filter='', toastTimer
+function save(){ if(READ_ONLY)throw new Error('This is a read-only snapshot.');validateState(state);try{localStorage.setItem('housecurrent-v1',JSON.stringify(state));storageOK=true}catch{storageOK=false;toast('Browser storage is unavailable. Export a backup before closing.')} }
+function toast(text){ $('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),4500) }
+function priceRange(low,high){return Math.abs(high-low)<.005?money(low):`${money(low)}–${money(high)}`}
+function periodBill(){return period.id==='current'?undefined:state.bills.find(b=>b.id===period.id)}
+function results(){return state.devices.map(d=>({d,...deviceEnergy(d,period.start,period.end,state.rates,state.nightHours)}))}
+function summary(){return usageSummary(state,period.start,period.end)}
+function heading(eyebrow,title,sub,actions=''){return `<div class="page-heading"><div><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p class="subtitle">${sub}</p></div><div class="heading-actions">${actions}</div></div>`}
+function button(label,action,primary=false,id=''){if(READ_ONLY)return '';return `<button class="btn ${primary?'primary':''}" data-action="${action}" ${id?`data-id="${esc(id)}"`:''}>${icon('plus')}${label}</button>`}
+function periodBar(){return `<div class="period-bar">${icon('calendar')}<span class="period-label">Viewing</span><select id="period-select" aria-label="Reporting period"><option value="current" ${period.id==='current'?'selected':''}>${period.id==='current'&&!period.anchored?'Today · add a bill to define periods':'Since this billing period start'}</option>${[...state.bills].sort((a,b)=>b.end.localeCompare(a.end)).map(x=>`<option value="${esc(x.id)}" ${period.id===x.id?'selected':''}>${dateLabel(x.start)} – ${dateLabel(x.end,true)} · bill</option>`).join('')}</select><span class="date-pill">${dateLabel(period.start)} → ${dateLabel(period.end,true)}</span><span class="badge">${dates(period.start,period.end).length} DAYS${period.id==='current'?' · THROUGH TODAY':' · BILLING PERIOD'}</span></div>`}
+
+function kpi(label,value,unit,note,type='grid',extra=''){return `<div class="kpi ${extra}"><div class="kpi-top">${label}${icon(type)}</div><div class="kpi-value">${value}<span>${unit}</span></div><small>${note}</small></div>`}
+function rateStrip(){const seasons=[...new Set(dates(period.start,period.end).map(season))],s=seasons[0];return '<div class="rate-strip"><strong>'+ (seasons.length>1?'Your interval crosses seasons':s==='summer'?'Summer rates':'Winter rates')+'</strong>'+ (seasons.length>1?'<span>Summer · $'+state.rates.summerOff.toFixed(5)+'–$'+state.rates.summerPeak.toFixed(5)+'/kWh</span><span>Winter · $'+state.rates.winterOff.toFixed(5)+'–$'+state.rates.winterPeak.toFixed(5)+'/kWh</span>':'<span><i class="dot"></i>Peak · $'+state.rates[s+'Peak'].toFixed(5)+'/kWh</span><span><i class="dot off"></i>Off-peak · $'+state.rates[s+'Off'].toFixed(5)+'/kWh</span>')+'<button class="text-button" data-action="go-rates">See rate schedule ↗</button></div>'}
+function emptyDevices(compact=false){return compact?`<div class="device-empty"><div class="empty-icon">${icon('devices')}</div><div><h3>Give every kilowatt-hour a home.</h3><p>Add your first appliance, computer, or other device. Start with watts and a schedule, or readings from a plug-in energy meter.</p></div>${button('Add a device','add-device',true)}</div><div class="next-step"><div class="step-card"><span class="step-num">1</span><div><strong>Name the device</strong><p>Keep it specific: office PC, fridge, or space heater.</p></div></div><div class="step-card"><span class="step-num">2</span><div><strong>Tell us how it runs</strong><p>Watts + hours, or a measured kWh interval.</p></div></div><div class="step-card"><span class="step-num">3</span><div><strong>See its energy footprint</strong><p>Separate grid use from solar-powered loads.</p></div></div></div>`:`<div class="no-data"><div class="empty-icon">${icon('devices')}</div><h3>Your household, one device at a time.</h3><p>No devices added yet. You don’t need smart plugs to get started—an average wattage and a usage schedule work too.</p>${button('Add your first device','add-device',true)}</div>`}
+function deviceTable(items,compact=false){
+  const roomName=x=>{const name=String(x.d.room||'').trim().replace(/\s+/g,' ')||'Unassigned room';return name[0].toUpperCase()+name.slice(1)}
+  if(!compact)items=[...items].sort((a,b)=>roomName(a).localeCompare(roomName(b),'en',{sensitivity:'base'}))
+  const roomTotals=roomUsage(items),canManage=!compact&&!READ_ONLY
+  let previousRoom=''
+  return `<div class="table-wrap"><table><thead><tr><th>Device</th><th>Method / source</th><th class="right">Watts</th><th class="right">Energy</th><th class="right">Base energy value</th>${canManage?'<th class="right">Manage</th>':''}</tr></thead><tbody>${items.map(x=>{
+    const room=roomName(x),key=room.toLowerCase(),roomColor=state.rooms.find(r=>roomKey(r.name)===key)?.color||'#899480',newRoom=!compact&&key!==previousRoom
+    const total=roomTotals.get(roomKey(x.d.room))
+    previousRoom=key
+    return `${newRoom?`<tr class="location-heading" style="--room-color:${roomColor}"><th colspan="2" scope="rowgroup"><span class="room-dot" style="background:${roomColor}" aria-hidden="true"></span>${esc(room)} <span class="badge gray">${total.count}</span></th><th class="right room-total">${fmt(total.kwh*1000/(dates(period.start,period.end).length*24),1)} W<small>Daily average</small></th><th class="right room-total">${fmt(total.kwh)} kWh<small>${filter?'Shown items':'Total energy'}</small></th><th class="right room-total">${priceRange(total.gridLow,total.gridHigh)}<small>Base grid cost</small>${total.mixedKwh?`<small>${fmt(total.mixedKwh)} kWh unallocated</small>`:''}</th>${canManage?'<th aria-label="Room actions"></th>':''}</tr>`:''}<tr class="${x.d.source==='solar'?'solar-device':''}"><td><div class="icon-cell"><span class="device-icon">${icon(x.d.source==='solar'?'solarPanel':'devices')}</span><div><strong>${esc(x.d.name)}</strong><small>${esc(x.d.room||'Unassigned room')}${x.d.mode==='event'?' · '+dateLabel(x.d.start,true)+' → '+dateLabel(x.d.end,true):''}${x.excluded?' · partial readings excluded':''}</small></div></div></td><td><span class="badge ${x.d.mode==='event'?'one-time':x.measured?'blue':'gray'}">${x.d.mode==='event'?'ONE-TIME':x.measured?'METERED':'ESTIMATED'}</span><small>${x.d.source==='grid'?'Grid powered':x.d.source==='solar'?'Off-grid solar':'Mixed / unallocated'}</small></td><td class="right"><strong>${x.d.watts==null?'—':fmt(x.d.watts,2)+' W'}</strong>${x.d.mode==='schedule'&&x.d.idleWatts?`<small>${fmt(x.d.idleWatts,2)} W standby</small>`:''}</td><td class="right"><strong>${fmt(x.kwh)} kWh</strong></td><td class="right"><strong>${priceRange(x.low,x.high)}</strong></td>${!canManage?'':`<td class="right"><div class="row-actions">${x.measured?`<button class="text-button" data-action="device-history" data-id="${esc(x.d.id)}">Readings</button>`:''}<button class="text-button" data-action="edit-device" data-id="${esc(x.d.id)}">Edit</button><button class="text-button delete-inline" data-action="delete-device" data-id="${esc(x.d.id)}">Remove</button></div></td>`}</tr>`}).join('')}</tbody></table></div>`}
+function billContext(){const b=periodBill(),solar=solarSummary(state,period.start,period.end);if(!b&&!solar.intervals.length)return '';return `<section class="bill-context" aria-label="Billing summary"><div><strong>${b?'Utility bill':'Solar meter'}</strong><small>${dateLabel(period.start)} – ${dateLabel(period.end,true)}</small></div>${b?`<div><small>Billed grid electricity</small><strong>${fmt(b.kwh)} kWh</strong></div><div><small>Base energy charges</small><strong>${b.energy==null?'—':money(b.energy)}</strong></div>`:''}${solar.intervals.length?`<div><small>Solar meter output</small><strong>${fmt(solar.measured)} kWh</strong></div>`:''}${b?'<a class="text-button" href="#bills">View bill ↗</a>':''}</section>`}
+function devices(){const s=summary(),visible=periodItems(s.items,period.start,period.end),items=visible.filter(x=>(x.d.name+' '+x.d.room).toLowerCase().includes(filter.toLowerCase()));return heading('YOUR ENERGY INVENTORY','Know what’s using the power.',READ_ONLY?'Household devices and energy use.':'Add measured usage or an everyday schedule. Refine it as you learn more.',button('Add device','add-device',true)+button('One-time use','add-event')+button('Rooms','rooms')+button('Merge devices','merge-devices'))+periodBar()+billContext()+`<div class="kpis device-kpis">${kpi('Grid energy used',fmt(s.kwh),'kWh','Tracked grid devices + one-time use','grid')}${kpi('Solar energy used',fmt(s.solarKwh),'kWh','Tracked solar devices + one-time use','solar','solar')}${kpi('Average daily use',fmt(s.averageKwhPerDay,2),'kWh/day',`All tracked energy ÷ ${dates(period.start,period.end).length} days`,'devices')}${kpi('Base grid energy cost',priceRange(s.low,s.high),'','Excludes fixed charges, riders, and tax','bills')}${kpi('Saved from solar',priceRange(s.solarLow,s.solarHigh),'','Estimated avoided base energy · tracked solar loads','solar','solar')}</div><div class="card"><div class="section-row"><h2>Device inventory <span class="badge gray">${visible.length}</span></h2><input id="device-search" type="search" aria-label="Search devices" placeholder="Search devices or rooms…" value="${esc(filter)}" style="padding:9px 11px;border:1px solid #dfe5d7;border-radius:6px;max-width:200px;min-width:0"></div>${state.devices.length?items.length?deviceTable(items):`<div class="no-data">${filter?'No devices match your search.':'No devices or one-time uses in this billing period.'}</div>`:emptyDevices()}</div>${s.items.some(x=>x.excluded)?'<div class="notice warning" style="margin-top:20px">Some measured entries only partly overlap these dates and are excluded. Select a period that includes each full interval.</div>':''}`}
+function billDetail(b){return `<article class="card bill-card"><header><div><p class="eyebrow">${esc(b.provider||'Electric utility')} · ELECTRICITY ONLY</p><h2>${dateLabel(b.start)} – ${dateLabel(b.end,true)}</h2><p class="subtitle">${dates(b.start,b.end).length} days · ${b.statement?'Statement '+dateLabel(b.statement,true):'Manual bill entry'}</p></div><div class="row-actions"><button class="text-button" data-action="use-bill" data-id="${esc(b.id)}">View period ↗</button>${READ_ONLY?'':`<button class="text-button" data-action="edit-bill" data-id="${esc(b.id)}">Edit</button><button class="text-button delete-inline" data-action="delete-bill" data-id="${esc(b.id)}">Remove</button>`}</div></header><div class="bill-summary"><div><small>Grid electricity</small><strong>${fmt(b.kwh)} <small style="display:inline">kWh</small></strong></div><div><small>Electricity total</small><strong>${money(b.total)}</strong></div><div><small>On-peak share</small><strong>${b.kwh?fmt(b.peakKwh/b.kwh*100):0}%</strong></div></div>${b.segments?.length?`<div class="table-wrap"><table><thead><tr><th>Energy line item</th><th class="right">kWh</th><th class="right">$/kWh</th><th class="right">Billed charge</th></tr></thead><tbody>${b.segments.map(x=>`<tr><td>${esc(x.label)}</td><td class="right">${fmt(x.kwh,2)}</td><td class="right">${Number(x.rate).toFixed(5)}</td><td class="right">${money(x.charge)}</td></tr>`).join('')}</tbody></table></div>`:''}<div class="charge-row"><span>Base energy charges ${b.energy==null?'(not entered)':''}</span><strong>${b.energy==null?'—':money(b.energy)}</strong></div><div class="charge-row"><span>Other electricity charges, fees & tax</span><strong>${b.energy==null?'—':money(b.total-b.energy)}</strong></div><div class="charge-row total"><span>Total electricity service</span><span>${money(b.total)}</span></div><p class="source-note">${esc(b.note||'Entered manually. Read-to-read dates; the ending read date is excluded from interval calculations.')}</p></article>`}
+function billsView(){return heading('THE GROUND TRUTH','Start with the utility meter.','Your actual electricity bills anchor the picture. Device estimates fill in the detail.',button('Add electricity bill','add-bill',true))+`<div class="notice">Your supplied October 16 bill is already entered. It spans summer and winter rates. The $20.45 natural gas service and payment/balance details are excluded. ${READ_ONLY?'':'Future bills can be added manually.'}</div>${[...state.bills].sort((a,b)=>b.end.localeCompare(a.end)).map(billDetail).join('')||'<div class="card no-data">No utility bills yet.</div>'}`}
+function ratesView(){const r=state.rates;return heading('THE RULES BEHIND THE NUMBERS','Right time. Different rate.','RE-TOU rates from your supplied schedule, interpreted in household Mountain Time.',READ_ONLY?'':`<button class="btn" data-action="edit-rates">Edit rate settings</button>`)+`<div class="card"><div class="card-header"><div><h2>Seasonal electricity rates</h2><p>Base energy prices per kWh. Fees, riders, adjustments, and taxes are separate.</p></div><span class="badge gold">YOUR SUPPLIED SCHEDULE</span></div><div class="table-wrap"><table class="rate-table"><thead><tr><th>Time period</th><th>SUMMER · JUN 1 – SEP 30</th><th>WINTER · OCT 1 – MAY 31</th></tr></thead><tbody><tr><td><strong><i class="dot"></i>On-peak</strong><small>Monday–Friday, 5 pm–9 pm</small></td><td class="price">$${r.summerPeak.toFixed(5)}<small>/ kWh</small></td><td class="price">$${r.winterPeak.toFixed(5)}<small>/ kWh</small></td></tr><tr><td><strong><i class="dot off"></i>Off-peak</strong><small>All other times, including weekends</small></td><td class="price">$${r.summerOff.toFixed(5)}<small>/ kWh</small></td><td class="price">$${r.winterOff.toFixed(5)}<small>/ kWh</small></td></tr><tr><td><strong>Flat rate (R-OO)</strong><small>Opt-out comparison · all day</small></td><td class="price">$${r.summerFlat.toFixed(5)}<small>/ kWh</small></td><td class="price">$${r.winterFlat.toFixed(5)}<small>/ kWh</small></td></tr></tbody></table></div><p class="source-note">Transcribed from your supplied rate image. No effective date was shown. ${READ_ONLY?'Recorded bill charges remain separate from device estimates.':'Editable for future changes; edits recalculate device and solar estimates, while recorded bill charges remain unchanged.'}</p></div><div class="card night-settings"><div class="section-row"><h2>Nighttime hours</h2>${READ_ONLY?'':'<button class="btn" data-action="edit-night">Edit nighttime hours</button>'}</div><p>Winter · ${esc(state.nightHours.winterStart)}–${esc(state.nightHours.winterEnd)} &nbsp; Summer · ${esc(state.nightHours.summerStart)}–${esc(state.nightHours.summerEnd)}</p><p class="subtitle">Shared by devices with Nighttime hours selected.</p></div><div class="split" style="margin-top:20px"><div class="card"><h2>Your weekly time-of-use window</h2><p class="subtitle">Peak pricing runs from 17:00 up to, but not including, 21:00.</p><div class="schedule-grid"><span></span>${Array.from({length:24},(_,h)=>`<span class="hour">${[0,6,12,18,23].includes(h)?h:''}</span>`).join('')}${['M–F','Sa/Su'].map((label,i)=>`<span>${label}</span>${Array.from({length:24},(_,h)=>`<i class="slot ${!i&&h>=17&&h<21?'peak':''}" aria-hidden="true"></i>`).join('')}`).join('')}</div><div class="rate-key"><span><i class="dot"></i>On-peak</span><span><i class="dot off"></i>Off-peak</span></div></div><div class="card"><h2>Good estimates have clear boundaries.</h2><div class="prose"><p>Device schedules price each hour using its day and season, including runs crossing midnight. A measured interval without timing gets a cost range.</p><p>We apply the weekday rule exactly as supplied. Holiday exceptions and tariff effective-date history are not configured. A single 24-hour wall-clock day is used across daylight-saving transitions.</p></div></div></div>`}
+function render(){period=reportingPeriod(state.bills,today(),periodChoice);periodChoice=period.id;const next=location.hash.slice(1);view=titles[next]?next:'devices';if(next!==view)history.replaceState(null,'','#'+view);$('#crumb').textContent=titles[view];document.title=`${titles[view]} · Housecurrent`;document.querySelectorAll('nav a').forEach(a=>{const key=a.dataset.view;a.innerHTML=icon(key)+`<span>${titles[key]}</span>${key==='devices'?`<span>${periodItems(results(),period.start,period.end).length||''}</span>`:''}`;a.classList.toggle('active',key===view);if(key===view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');a.setAttribute('aria-label',titles[key])});$('#save-state').textContent=READ_ONLY?'Read-only snapshot':storageOK?'Saved on this device':'Storage issue · export a backup';$('#content').innerHTML=(loadWarning?`<div class="notice warning">${esc(loadWarning)}</div>`:'')+({devices,bills:billsView,rates:ratesView}[view])()}
+function modal(title,sub,body,submit='Save',kind='',id=''){ $('#modal-body').innerHTML=`<div class="modal-inner"><div class="modal-top"><div><h2>${title}</h2><p class="subtitle">${sub}</p></div><button class="close-btn" aria-label="Close dialog" data-action="close">×</button></div><form id="active-form" data-kind="${kind}" data-id="${esc(id)}">${body}<div class="form-error" role="alert" id="form-error"></div><div class="form-actions"><button type="button" class="btn" data-action="close">Cancel</button><button class="btn primary" type="submit">${submit}</button></div></form></div>`;$('#modal').setAttribute('aria-label',title);if(!$('#modal').open)$('#modal').showModal() }
+function field(label,name,type='text',value='',extra='',hint=''){return `<label class="field">${label}<input type="${type}" name="${name}" value="${esc(value)}" ${extra}>${hint?`<small>${hint}</small>`:''}</label>`}
+function select(label,name,options,value){return `<label class="field">${label}<select name="${name}">${options.map(([val,text])=>`<option value="${esc(val)}" ${value===val?'selected':''}>${esc(text)}</option>`).join('')}</select></label>`}
+function roomSelect(label,value){return select(label,'room',[['','Unassigned room'],...state.rooms.map(r=>[r.name,r.name])],value)}
+function roomsForm(){modal('Rooms','Organize your inventory with a distinct color for each location.',`<div class="room-list">${state.rooms.length?state.rooms.map(r=>`<div class="room-item"><span class="room-dot" style="background:${r.color}" aria-hidden="true"></span><strong>${esc(r.name)}</strong><small>${state.devices.filter(d=>roomKey(d.room)===roomKey(r.name)).length} items</small><button type="button" class="text-button" data-action="edit-room" data-id="${esc(r.id)}" aria-label="Edit ${esc(r.name)}">Edit</button><button type="button" class="text-button delete-inline" data-action="remove-room" data-id="${esc(r.id)}" aria-label="Remove ${esc(r.name)}">Remove</button></div>`).join(''):'<p class="subtitle">No rooms yet. Devices remain in Unassigned room.</p>'}</div><h3>Add a room</h3><div class="room-editor">${field('Room name','name','text','','required maxlength="80" placeholder="e.g. Living room"')}${field('Room color','color','color',nextRoomColor(state.rooms),'required')}</div><p class="source-note">Each room has a unique color. Removing a room moves its devices to Unassigned room and keeps every reading.</p>`,'Add room','room-add')}
+function editRoomForm(id){const r=state.rooms.find(r=>r.id===id);if(!r)throw new Error('Room not found.');modal('Edit room','Renaming updates every device assigned to this room.',`<div class="room-editor">${field('Room name','name','text',r.name,'required maxlength="80"')}${field('Room color','color','color',r.color,'required')}</div>`,'Save room','room-edit',id)}
+function removeRoomForm(id){const r=state.rooms.find(r=>r.id===id);if(!r)throw new Error('Room not found.');modal('Remove room?','Device entries and readings will be kept.',`<div class="notice">Remove ${esc(r.name)} from your room list? Its ${state.devices.filter(d=>roomKey(d.room)===roomKey(r.name)).length} assigned items will move to Unassigned room. You can reassign them at any time.</div>`,'Remove room','room-remove',id)}
+function formObject(){return Object.fromEntries(new FormData($('#active-form')))}
+function toggleBlock(name,html){return `<div data-fields="${name}" class="full">${html}</div>`}
+function syncForm(){
+ const form=$('#active-form');if(!form)return
+ const value=n=>form.elements.namedItem(n)?.value,checked=n=>form.elements.namedItem(n)?.checked
+ const night=checked('nightTime'),show={days:value('daysMode')==='specific',run:!night,specific:!night&&value('runMode')!=='always',kwh:value('inputMode')!=='continuous',continuous:value('inputMode')==='continuous'}
+ for(const block of form.querySelectorAll('[data-fields]')){const visible=show[block.dataset.fields];block.hidden=!visible;for(const input of block.querySelectorAll('input,select'))input.disabled=!visible}
+ // Nested time fields must stay disabled when their enclosing group is hidden.
+ for(const input of form.querySelectorAll('[data-fields][hidden] input,[data-fields][hidden] select'))input.disabled=true
+}
+function deviceForm(d={}){
+ const mode=d.mode||'schedule',days=d.days||[0,1,2,3,4,5,6],all=days.length===7
+ modal(d.id?'Edit device':'Add a device','Set active power and standby in a single entry.',`<div class="toggle-tabs"><button type="button" class="${mode==='schedule'?'active':''}" data-action="device-mode" data-mode="schedule">Watts + schedule</button><button type="button" class="${mode==='measured'?'active':''}" data-action="device-mode" data-mode="measured">Measured kWh</button></div><input type="hidden" name="mode" value="${mode}"><div class="form-grid">${field('Device name','name','text',d.name||'','required maxlength="100"')}${roomSelect('Room or location',d.room||'')}<div class="full">${select('Power source','source',[['grid','Grid powered'],['solar','Off-grid solar'],['mixed','Mixed / not allocated']],d.source||'grid')}</div>${mode==='schedule'?`${field('Active power (watts)','watts','number',d.watts??'','required min="0" max="1000000" step="any"')}${field('Idle / standby power (watts)','idleWatts','number',d.idleWatts??0,'min="0" max="1000000" step="any"','Active power is the total while running. Standby applies at other times.')}<label class="night-check full"><input type="checkbox" name="nightTime" ${d.nightTime?'checked':''}> Nighttime hours <small>Uses the shared winter and summer schedule in Rates & time of use.</small></label><div class="full">${select('Days the run starts','daysMode',[['always','Runs every day'],['specific','Runs on specific days']],d.daysMode||(all?'always':'specific'))}</div>${toggleBlock('days',`<div class="days">${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map((x,i)=>`<label><input aria-label="${x}" type="checkbox" name="days" value="${i}" ${days.includes(i)?'checked':''}><span>${x.slice(0,2)}</span></label>`).join('')}</div>`)}${toggleBlock('run',`${select('Hours per run','runMode',[['always','Always running'],['hours','Specific hours per run']],d.runMode||(Number(d.hours)===24?'always':'hours'))}${toggleBlock('specific',`<div class="form-grid">${field('Hours per run','hours','number',d.hours??8,'required min="0.01" max="24" step="any"')}${field('Run starts (Mountain Time)','startTime','time',d.startTime||'09:00','required')}</div><details ${d.summerStartTime&&!d.nightTime?'open':''}><summary>Custom summer schedule (optional)</summary><div class="form-grid">${field('Summer run starts','summerStartTime','time',d.nightTime?'':d.summerStartTime||'')}${field('Summer hours per run','summerHours','number',d.nightTime?'':d.summerHours??'','min="0.01" max="24" step="any"')}</div></details>`)}`)}`:`<div class="full notice">Save the device, then manage its measured intervals using Readings. Existing readings are retained.</div>${field('Power (watts, optional)','watts','number',d.watts??'','min="0" max="1000000" step="any"')}`}${field('Notes (optional)','note','text',d.note||'','maxlength="300"')}</div>`,d.id?'Save device':'Add device','device',d.id||'');syncForm()
+}
+function eventForm(d={}){
+ modal(d.id?'Edit one-time use':'Add one-time use','Record total energy or a continuous draw between two dates.',`<div class="form-grid">${field('Name','name','text',d.name||'','required maxlength="100"')}${roomSelect('Location',d.room||'')}${field('Starting date','start','date',d.start||today(),'required')}${field('Ending date (excluded)','end','date',d.end||iso(dateMs(today())+DAY),'required')}</div>${select('Energy entry','inputMode',[['kwh','Total energy (kWh)'],['continuous','Continuous draw over these dates (watts)']],d.inputMode||'kwh')}${toggleBlock('kwh',`${select('Energy measured at','basis',[['wall','Wall / charging meter — supply energy'],['delivered','Car / equipment — delivered energy']],d.basis||'wall')}<div class="form-grid">${field('Energy (kWh)','kwh','number',d.kwh??'','required min="0" step="any"')}${field('Delivered share (%)','efficiency','number',d.efficiency??90,'required min="0.1" max="100" step="any"','Used only for delivered-energy entries.')}</div>${select('When was this energy used?','timing',[['unknown','Unknown / mixed'],['off','Entirely off-peak'],['peak','Entirely on-peak']],d.timing||'unknown')}<p class="source-note">Total kWh entries must fit completely inside the viewing period.</p>`)}${toggleBlock('continuous',`${field('Continuous power (watts)','watts','number',d.inputMode==='continuous'?d.watts:'','required min="0" max="1000000" step="any"')}<p class="source-note">Runs 24 hours each day. Energy is calculated for the dates that fall inside the viewing period.</p>`)}${select('Power source','source',[['grid','Grid powered'],['solar','Off-grid solar'],['mixed','Mixed / not allocated']],d.source||'grid')}${field('Notes (optional)','note','text',d.note||'','maxlength="500"')}`,'Save one-time use','event',d.id||'');syncForm()
+}
+function nightForm(){modal('Nighttime hours','Devices with Nighttime hours checked follow these shared settings.',`<div class="form-grid">${field('Winter starts','winterStart','time',state.nightHours.winterStart,'required')}${field('Winter ends','winterEnd','time',state.nightHours.winterEnd,'required')}${field('Summer starts','summerStart','time',state.nightHours.summerStart,'required')}${field('Summer ends','summerEnd','time',state.nightHours.summerEnd,'required')}</div><p class="source-note">Winter: October–May. Summer: June–September. End times earlier than the start are on the following day. Changes recalculate all viewing periods.</p>`,'Save nighttime hours','night-hours')}
+function mergeForm(){const options=state.devices.filter(d=>d.mode==='schedule').map(d=>[d.id,`${d.room||'Unassigned'} · ${d.name} (${fmt(d.watts)} W)`]);modal('Merge idle and active entries','Combine two entries for the same equipment, room and power source.',`${field('Combined device name','name','text','','required maxlength="100"')}${select('Continuous idle entry','idleId',options,'')}${select('Active entry','activeId',options,'')}${select('Active reading means','activeMeaning',[['extra','Additional power above the idle entry — preserve current totals'],['total','Total measured power while active']], 'extra')}<p class="source-note">The active schedule is kept. The continuous idle row becomes standby power and is removed. Export a backup before merging.</p>`,'Merge devices','merge')}
+function deviceHistory(id){const d=state.devices.find(x=>x.id===id);modal('Device readings',esc(d.name),`<div class="notice">Use the difference between two meter readings, or a resettable meter’s interval total. Intervals must not overlap.</div>${d.logs?.length?`<div class="table-wrap"><table><thead><tr><th>Interval</th><th class="right">kWh</th><th>Manage</th></tr></thead><tbody>${d.logs.map(l=>`<tr><td>${dateLabel(l.start)} – ${dateLabel(l.end,true)}</td><td class="right">${fmt(l.kwh)}</td><td><div class="row-actions"><button type="button" class="text-button" data-action="edit-device-log" data-id="${esc(id)}" data-log="${esc(l.id)}">Edit</button><button type="button" class="text-button delete-inline" data-action="delete-device-log" data-id="${esc(id)}" data-log="${esc(l.id)}">Remove</button></div></td></tr>`).join('')}</tbody></table></div>`:'<p class="subtitle">No measured intervals yet.</p>'}<div style="margin-top:20px"><button type="button" class="btn primary" data-action="add-device-log" data-id="${esc(id)}">+ Add kWh interval</button></div>`,'Done','done')}
+function deviceLogForm(id,logId){const d=state.devices.find(x=>x.id===id),log=d.logs?.find(x=>x.id===logId)||{};modal('Log device energy',esc(d.name)+' · Measured kWh for a complete interval.',`<input type="hidden" name="logId" value="${esc(log.id||'')}"><div class="form-grid">${field('Starting read date','start','date',log.start||period.start,'required')}${field('Ending read date (excluded)','end','date',log.end||period.end,'required')}${field('Energy used in interval (kWh)','kwh','number',log.kwh??'','required min="0" step="any"')}${field('On-peak kWh (optional)','peakKwh','number',log.peakKwh??'','min="0" step="any"','Leave blank if timing is unknown.')}</div>`,'Save interval','device-log',id)}
+function solarForm(r={}){modal(r.id?'Edit meter reading':'Log a solar meter reading','Use the cumulative energy counter measured from battery output.',`<div class="form-grid">${field('Read date','date','date',r.date||today(),'required')}${field('Cumulative counter (kWh)','kwh','number',r.kwh??'','required min="0" step="any" placeholder="e.g. 142.380"')}</div><p class="source-note">Use kWh, not instantaneous W or battery charge percentage. The first entry is a baseline. Whole-day read-to-read intervals; no time-of-day allocation.</p><label class="field" style="display:block"><input type="checkbox" name="reset" style="width:auto;margin-right:8px" ${r.reset?'checked':''}>New baseline after meter reset / replacement</label>${field('Note (optional)','note','text',r.note||'','maxlength="250" placeholder="e.g. Output meter at battery AC socket"')}`,'Save reading','solar',r.id||'')}
+function solarSettings(){modal('Solar meter setup','Make the measurement boundary explicit.',`${field('Meter name','name','text',state.solar.name,'required maxlength="100"')}${select('Where is energy being measured?','kind',[['unknown','Battery output · location not yet confirmed'],['ac','AC power meter after inverter'],['dc','Battery DC/output reading before inverter']],state.solar.kind)}${field('Delivered share if before inverter (%)','efficiency','number',state.solar.efficiency??'','min="0.1" max="100" step="any" placeholder="Optional, e.g. 90"','Optional estimate, not a measured efficiency. Leave blank to report output kWh without a dollar savings estimate. Ignored for an AC meter after the inverter.')}`,'Save setup','solar-settings')}
+function billForm(b={}){modal(b.id?'Edit electricity bill':'Add electricity bill','Electricity service only. Exclude gas and account payments.',`<div class="form-grid">${field('Starting meter read','start','date',b.start||period.start,'required')}${field('Ending meter read (excluded)','end','date',b.end||period.end,'required')}${field('Total electricity (kWh)','kwh','number',b.kwh??'','required min="0" step="any"')}${field('On-peak electricity (kWh)','peakKwh','number',b.peakKwh??'','required min="0" step="any"')}${field('Electricity bill total ($)','total','number',b.total??'','required min="0" step="0.01"')}${field('Base energy charges ($, optional)','energy','number',b.energy??'','min="0" step="0.01"')}${field('Statement date (optional)','statement','date',b.statement||'')}${field('Utility name','provider','text',b.provider||'Xcel Energy','maxlength="100"')}</div>${field('Note','note','text',b.note||'','maxlength="400"')}${b.segments?'<p class="source-note">Editing billed totals removes the original line-item detail so it cannot contradict your edits. The exported backup can preserve the original.</p>':''}`,'Save bill','bill',b.id||'')}
+function ratesForm(){modal('Edit base energy rates','Changes recalculate estimates, including historical views.',`<div class="notice">Enter dollars per kWh, not cents. The supplied peak schedule stays Monday–Friday, 5–9 pm.</div><div class="form-grid">${Object.entries({summerPeak:'Summer on-peak',summerOff:'Summer off-peak',winterPeak:'Winter on-peak',winterOff:'Winter off-peak',summerFlat:'Summer flat (comparison)',winterFlat:'Winter flat (comparison)'}).map(([key,label])=>field(label+' ($/kWh)',key,'number',state.rates[key],'required min="0" max="10" step="0.00001"')).join('')}</div><div style="margin-top:15px"><button type="button" class="text-button" data-action="default-rates">Reset fields to supplied schedule</button></div>`,'Save rates','rates')}
+function explain(){modal('How Housecurrent calculates','A clear boundary between readings and estimates.',`<div class="prose"><h3>Actual bills stay actual.</h3><p>Billed grid kWh is imported electricity, already reduced by any loads powered off-grid. Solar is not subtracted from it again. Your electricity total is separate from base energy charges and from natural gas.</p><h3>Device schedules are estimates.</h3><p>Average watts ÷ 1,000 × hours gives kWh. Continuous standby is counted separately; running watts replace standby during scheduled runs. The schedule is repeated on the selected days and priced by the actual calendar day, season and time. Rates use household Mountain Time, independent of the browser’s timezone. DST transition days use a 24-hour wall-clock model. No holiday exclusions are assumed.</p><h3>Uncertain timing gets a range.</h3><p>Grid measured intervals without a peak split and solar meter journal intervals get a minimum-to-maximum base energy value. Solar-powered device kWh entries instead use estimated averages of $0.08/kWh winter and $0.10/kWh summer; a single interval crossing seasons keeps a range until seasonal kWh are known. We do not invent solar’s hourly profile. Partial intervals are excluded rather than prorated.</p><h3>Solar’s measurement location matters.</h3><p>AC after-inverter kWh is treated as delivered household energy. DC output requires an optional delivered-share estimate; otherwise only measured output is shown. This assumes output serves household loads that would otherwise use grid power. Solar value is not a utility credit.</p>${READ_ONLY?'<h3>Read-only snapshot.</h3><p>Records are included in this website file and load identically across browsers. Updates are made in the local editor, then exported and uploaded as a replacement snapshot. This page has no shared data-writing service.</p>':'<h3>Your data stays in this browser.</h3><p>Device and meter entries are saved in local browser storage; there is no cloud sync. Use Export backup and Restore backup to move data or recover it. Private browsing, clearing site data, or changing browsers can remove access to local records.</p>'}<h3>Reading intervals.</h3><p>Dates are start-inclusive and end-exclusive, matching the 29-day September 15 → October 14 interval on your supplied bill. Record cumulative solar counters at a consistent time; calculations treat them as start-of-day readings.</p></div>`,'Got it','done')}
+function confirmRemove(kind,id,logId){const names={device:'device and its readings',solar:'solar reading',bill:'electricity bill','device-log':'device interval'};modal('Remove this '+names[kind]+'?','Export a backup first if you want to keep a copy.',`<div class="notice">${kind==='solar'?'Removing a cumulative reading recomputes the intervals between its neighbours. It does not reset your physical meter.':'This removes only the selected app record. It does not affect any physical meter or utility data.'}</div><input type="hidden" name="targetKind" value="${kind}"><input type="hidden" name="logId" value="${esc(logId||'')}">`,'Remove record','remove',id)}
+function exportBackup(){if(READ_ONLY)return;const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`housecurrent-backup-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);toast('Backup downloaded. Keep it somewhere safe.')}
+document.addEventListener('click',e=>{const btn=e.target.closest('[data-action]');if(!btn)return;const{action,id,log}=btn.dataset;if(READ_ONLY&&!['close','go-rates','use-bill'].includes(action))return;try{
+  if(action==='close')return $('#modal').close()
+  if(action==='edit-night')nightForm()
+  if(action==='merge-devices')mergeForm()
+  if(action==='rooms')roomsForm()
+  if(action==='edit-room')editRoomForm(id)
+  if(action==='remove-room')removeRoomForm(id)
+  if(action==='add-event')eventForm()
+  if(action==='add-device')deviceForm()
+  if(action==='edit-device'){const d=state.devices.find(d=>d.id===id);if(d.mode==='event')eventForm(d);else deviceForm(d)}
+  if(action==='device-mode'){const d=formObject();d.id=$('#active-form').dataset.id;d.days=d.daysMode==='always'?[0,1,2,3,4,5,6]:new FormData($('#active-form')).getAll('days').map(Number);d.nightTime=d.nightTime==='on';d.mode=btn.dataset.mode;deviceForm(d)}
+  if(action==='device-history')deviceHistory(id)
+  if(action==='add-device-log'||action==='edit-device-log')deviceLogForm(id,log)
+  if(action==='delete-device-log')confirmRemove('device-log',id,log)
+  if(action==='add-solar')solarForm()
+  if(action==='edit-solar')solarForm(state.solarReadings.find(r=>r.id===id))
+  if(action==='solar-settings')solarSettings()
+  if(action==='add-bill')billForm()
+  if(action==='edit-bill')billForm(state.bills.find(b=>b.id===id))
+  if(action==='use-bill'){const b=state.bills.find(b=>b.id===id);selectPeriod(b.id);location.hash='devices';render()}
+  if(action.startsWith('delete-')&&action!=='delete-device-log')confirmRemove(action.slice(7),id)
+  if(action==='go-rates')location.hash='rates'
+  if(action==='edit-rates')ratesForm()
+  if(action==='default-rates')for(const[key,value]of Object.entries(DEFAULT_RATES))$(`[name="${key}"]`,$('#active-form')).value=value
+}catch(error){toast(error.message)}})
+document.addEventListener('submit',e=>{if(e.target.id!=='active-form')return;e.preventDefault();if(READ_ONLY){$('#modal').close();return}const form=e.target,f=Object.fromEntries(new FormData(form)),kind=form.dataset.kind,id=form.dataset.id;const oldState=structuredClone(state);try{
+  if(kind==='done')return $('#modal').close()
+  if(['room-add','room-edit','room-remove'].includes(kind)){
+    if(kind==='room-remove')removeRoom(state,id)
+    else updateRoom(state,kind==='room-add'?uid():id,f.name,f.color)
+    validateState(state);save();render();roomsForm();toast(kind==='room-remove'?'Room removed. Entries kept.':'Room saved.');return
+  }
+  if(kind==='event'){
+    const continuous=f.inputMode==='continuous'
+    const d={id:id||uid(),mode:'event',name:f.name.trim(),room:f.room.trim(),source:f.source,start:f.start,end:f.end,inputMode:f.inputMode,basis:continuous?'wall':f.basis,kwh:continuous?0:num(f.kwh,'Energy'),efficiency:continuous?100:num(f.efficiency,'Delivered share',.1,100),timing:continuous?'unknown':f.timing,note:f.note||''}
+    if(continuous)d.watts=num(f.watts,'Continuous watts',0,1000000)
+    else {const previous=state.devices.find(x=>x.id===id);if(previous?.watts!=null&&previous.inputMode!=='continuous')d.watts=previous.watts}
+    validateDevice(d);eventValue(d,state.rates);state.devices=id?state.devices.map(x=>x.id===id?d:x):[...state.devices,d]
+  }
+  if(kind==='device'){
+    const existing=state.devices.find(d=>d.id===id),d={id:id||uid(),name:f.name.trim(),room:f.room.trim(),source:f.source,mode:f.mode,note:f.note||'',logs:existing?.logs||[]}
+    if(d.mode==='schedule'){const night=f.nightTime==='on',schedule=night?nightSchedule(state.nightHours,'winter'):f.runMode==='always'?{hours:24,startTime:'00:00'}:{hours:num(f.hours,'Hours',.01,24),startTime:f.startTime};Object.assign(d,{watts:num(f.watts,'Watts'),...schedule,nightTime:night,days:f.daysMode==='always'?[0,1,2,3,4,5,6]:new FormData(form).getAll('days').map(Number)})}
+    if(d.mode==='schedule'){
+      d.idleWatts=num(f.idleWatts||0,'Idle watts',0,d.watts)
+      if(!d.nightTime&&(f.summerStartTime||f.summerHours)){d.summerStartTime=f.summerStartTime;d.summerHours=num(f.summerHours,'Summer hours',.01,24)}
+    }
+    else {d.logs=existing?.logs||[];if(f.watts!=='')d.watts=num(f.watts,'Watts',0,1000000)}
+    validateDevice(d);state.devices=existing?state.devices.map(x=>x.id===id?d:x):[...state.devices,d]
+  }
+  if(kind==='device-log'){
+    const d=state.devices.find(x=>x.id===id),l={id:f.logId||uid(),start:f.start,end:f.end,kwh:num(f.kwh,'kWh'),peakKwh:f.peakKwh===''?null:num(f.peakKwh,'On-peak kWh')}
+    dates(l.start,l.end);if(l.peakKwh!=null)energyValue(l.kwh,l.start,l.end,state.rates,l.peakKwh)
+    d.logs=f.logId?d.logs.map(x=>x.id===f.logId?l:x):[...(d.logs||[]),l];validateDevice(d)
+  }
+  if(kind==='solar'){
+    const r={id:id||uid(),date:f.date,kwh:num(f.kwh,'Cumulative kWh'),note:f.note||'',reset:f.reset==='on'};dateMs(r.date)
+    const readings=id?state.solarReadings.map(x=>x.id===id?r:x):[...state.solarReadings,r];solarIntervals(readings);state.solarReadings=readings
+  }
+  if(kind==='solar-settings'){state.solar={name:f.name.trim(),kind:f.kind,efficiency:f.efficiency===''?null:num(f.efficiency,'Delivered share',.1,100)}}
+  if(kind==='bill'){
+    const b={id:id||uid(),start:f.start,end:f.end,kwh:num(f.kwh,'Bill kWh'),peakKwh:num(f.peakKwh,'Peak kWh'),total:num(f.total,'Electricity bill'),energy:f.energy===''?null:num(f.energy,'Base energy charges'),provider:f.provider,statement:f.statement,note:f.note}
+    dates(b.start,b.end);if(b.peakKwh>b.kwh)throw new Error('On-peak kWh cannot exceed total kWh.');if(b.energy!=null&&b.energy>b.total)throw new Error('Base energy cannot exceed the electricity total.');if(b.statement)dateMs(b.statement)
+    if(state.bills.some(x=>x.id!==id&&x.start===b.start&&x.end===b.end))throw new Error('A bill already exists for those reading dates. Edit it instead.')
+    state.bills=id?state.bills.map(x=>x.id===id?b:x):[...state.bills,b];selectPeriod(b.id)
+  }
+  if(kind==='night-hours'){state.nightHours=Object.fromEntries(['winterStart','winterEnd','summerStart','summerEnd'].map(k=>[k,f[k]]))}
+  if(kind==='merge')mergeIdleActive(state,f.idleId,f.activeId,f.name,f.activeMeaning==='total')
+  if(kind==='rates'){for(const key of Object.keys(DEFAULT_RATES))state.rates[key]=num(f[key],'Energy rate',0,10)}
+  if(kind==='remove'){
+    if(f.targetKind==='device')state.devices=state.devices.filter(x=>x.id!==id)
+    if(f.targetKind==='solar')state.solarReadings=state.solarReadings.filter(x=>x.id!==id)
+    if(f.targetKind==='bill')state.bills=state.bills.filter(x=>x.id!==id)
+    if(f.targetKind==='device-log')state.devices.find(x=>x.id===id).logs=state.devices.find(x=>x.id===id).logs.filter(x=>x.id!==f.logId)
+  }
+  validateState(state);save();$('#modal').close();render();toast(kind==='remove'?'Record removed.':'Saved to this browser.')
+}catch(error){state=oldState;$('#form-error').textContent=error.message}})
+document.addEventListener('change',e=>{
+  if(e.target.matches('#active-form [name=daysMode],#active-form [name=runMode],#active-form [name=nightTime],#active-form [name=inputMode]'))syncForm()
+  if(e.target.id==='all-week'){
+    document.querySelectorAll('#active-form input[name="days"]').forEach(day=>{day.checked=e.target.checked})
+    return
+  }
+  if(e.target.matches('#active-form input[name="days"]')){
+    const all=$('#all-week');if(all)all.checked=[...document.querySelectorAll('#active-form input[name="days"]')].every(day=>day.checked)
+    return
+  }
+  if(e.target.id==='period-select'){selectPeriod(e.target.value);render()}})
+document.addEventListener('input',e=>{if(e.target.id==='device-search'){filter=e.target.value;const selection=e.target.selectionStart;render();$('#device-search').focus();$('#device-search').setSelectionRange(selection,selection)}})
+$('#export-side').addEventListener('click',exportBackup)
+$('#import-side').addEventListener('click',()=>$('#backup-file').click())
+$('#export-footer').addEventListener('click',exportBackup)
+$('#import-footer').addEventListener('click',()=>$('#backup-file').click())
+$('#about-button').addEventListener('click',explain)
+$('#backup-file').addEventListener('change',async e=>{if(READ_ONLY)return;const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>5000000)throw new Error('Backup must be smaller than 5 MB.');const incoming=validateState(JSON.parse(await file.text()));modal('Restore this backup?','This replaces the data currently saved in this browser.',`<div class="notice">${incoming.devices.length} devices · ${incoming.bills.length} bills · ${incoming.solarReadings.length} solar readings.<br>Export your current data before replacing it.</div><button type="button" class="text-button" id="backup-before-restore">Export current data first</button>`,'Restore backup','restore');$('#backup-before-restore').onclick=exportBackup;const form=$('#active-form');form.addEventListener('submit',event=>{event.preventDefault();event.stopImmediatePropagation();state=incoming;loadWarning='';save();selectPeriod('current');$('#modal').close();render();toast('Backup restored.')})}catch(error){toast(error.message)}})
+if(READ_ONLY){document.body.classList.add('read-only');for(const id of ['export-side','import-side','export-footer','import-footer','backup-file'])$('#'+id)?.remove();$('.local-note').innerHTML='<div>Published snapshot<small>Updates are made in the local app.</small></div>'}
+window.addEventListener('hashchange',()=>{filter='';render()})
+render()
+</script></body></html>

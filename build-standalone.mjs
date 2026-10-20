@@ -1,0 +1,12 @@
+import fs from 'node:fs'
+const css=fs.readFileSync('dist/styles.css','utf8')
+const energy=fs.readFileSync('dist/energy.js','utf8').replace(/^export /gm,'')
+const app=fs.readFileSync('dist/app.js','utf8').replace(/^import .*\r?\n/,'')
+const source=(energy+'\n'+app).replace(/<\/script/gi,'<\\/script')
+let html=fs.readFileSync('dist/index.html','utf8')
+html=html.replace('<link rel="stylesheet" href="styles.css">',()=>'<style>'+css+'</style>')
+html=html.replace('<script type="module" src="app.js"></script>','')
+html=html.replace('</body>',()=>'<script type="module">'+source+'</script></body>')
+fs.writeFileSync('Housecurrent.html',html)
+fs.writeFileSync('dist/Housecurrent.html',html)
+console.log('Created Housecurrent.html: self-contained app, no server or network dependencies.')

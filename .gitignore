@@ -1,0 +1,18 @@
+# Local configuration and development artifacts
+.openai/
+.qa/
+node_modules/
+*.tar.gz
+.env
+.env.*
+
+# Household data and generated viewers
+/website/
+/dist/website/
+housecurrent-backup*.json
+housecurrent-before-*.json
+housecurrent-after-*.json
+
+# Historical local notes and screenshots
+/VALIDATION.md
+/Housecurrent-preview.png
