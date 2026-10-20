@@ -26,7 +26,7 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 - **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the midpoint for cost ranges); headers show average watts, total energy, and base grid cost.
 - **Power sources:** Separate grid-powered, off-grid solar, and mixed/unallocated loads. Solar items have a panel icon and green background.
 - **Billing periods:** View a saved utility billing interval or usage since the current billing period began. Entries outside the selected period are hidden.
-- **Summary:** See grid kWh, solar kWh, average kWh/day, base grid energy cost, and estimated savings from solar.
+- **Summary:** See grid kWh, solar kWh, average grid kWh/day (excluding solar and mixed loads), base grid energy cost, and estimated savings from solar.
 - **Backups:** Export and restore validated JSON files containing records, locations, rates, and settings.
 
 ## Rates and calculation boundaries

@@ -201,7 +201,7 @@ export function usageSummary(state,start,end) {
   const items=state.devices.map(d=>({d,...deviceEnergy(d,start,end,state.rates,state.nightHours)}))
   const grid=items.filter(x=>x.d.source==='grid'),solar=items.filter(x=>x.d.source==='solar'),mixed=items.filter(x=>x.d.source==='mixed')
   const total=(rows,key)=>rows.reduce((n,x)=>n+x[key],0)
-  const totalKwh=total(items,'kwh'),averageKwhPerDay=totalKwh/dates(start,end).length
+  const totalKwh=total(items,'kwh'),averageKwhPerDay=total(grid,'kwh')/dates(start,end).length
   return {items,grid,solar,mixed,totalKwh,averageKwhPerDay,kwh:total(grid,'kwh'),low:total(grid,'low'),high:total(grid,'high'),solarKwh:total(solar,'kwh'),solarLow:total(solar,'low'),solarHigh:total(solar,'high'),mixedKwh:total(mixed,'kwh')}
 }
 
