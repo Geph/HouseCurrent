@@ -49,7 +49,7 @@ try {
     if (!is_array($body)) hc_reply(400,['error'=>'Invalid request.']);
     if ($action==='login') {
         $password=$body['password'] ?? '';
-        if (!is_string($password) || strlen($password)>72) hc_reply(400,['error'=>'Invalid password.']);
+        if (!is_string($password) || strlen($password)>72) hc_reply(400,['error'=>'Invalid PIN.']);
         $client=hash('sha256',$_SERVER['REMOTE_ADDR'] ?? 'unknown');
         $db->exec('BEGIN IMMEDIATE');
         $cleanup=$db->prepare('DELETE FROM login_attempts WHERE attempted_at < ?');$cleanup->execute([time()-900]);
@@ -58,7 +58,7 @@ try {
             $db->exec('COMMIT');header('Retry-After: 900');hc_reply(429,['error'=>'Too many login attempts. Try again in 15 minutes.']);
         }
         $query=$db->prepare('INSERT INTO login_attempts(client,attempted_at) VALUES (?,?)');$query->execute([$client,time()]);$db->exec('COMMIT');
-        if (!password_verify($password,$passwordHash)) hc_reply(401,['error'=>'Incorrect password.']);
+        if (!password_verify($password,$passwordHash)) hc_reply(401,['error'=>'Incorrect PIN.']);
         $query=$db->prepare('DELETE FROM login_attempts WHERE client=?');$query->execute([$client]);
         session_regenerate_id(true);
         $_SESSION['last_active']=time();$_SESSION['csrf']=bin2hex(random_bytes(32));$_SESSION['credential_version']=hash('sha256',$passwordHash);

@@ -17,7 +17,7 @@ Requires PHP **8.1 or newer**, PDO SQLite, HTTPS, and SSH access for setup. Use 
    php setup.php /home/USERNAME/housecurrent-power-private
    ```
 
-4. Choose and repeat your own password at the private terminal prompts. Use 12–72 bytes; a passphrase is recommended. A sufficiently long numeric PIN also works. Do not put the password in a command argument, source file, GitHub, or this chat. On an interactive Unix terminal, password input is hidden. Only its password hash is saved.
+4. Choose and repeat your own PIN at the private terminal prompts. Use 6–12 digits (0–9), with no letters or symbols. Do not put the password in a command argument, source file, GitHub, or this chat. On an interactive Unix terminal, password input is hidden. Only its password hash is saved.
 5. Open **https://jeffginger.com/power/** and choose **Sign in to edit**.
 6. Once signed in, use **Restore backup** to import your current JSON backup. This initial import replaces the starter records. Visitors never need to upload a file. Afterwards, add and adjust devices directly on the hosted site.
 
@@ -44,16 +44,16 @@ node build-server.mjs
 
 Upload the newly generated files inside `hosted/power` over the existing `/power` files. Leave the private database directory alone; it holds your records and password hash independently of app updates. Do not rerun initial setup.
 
-## Change or recover the editing password
+## Change or recover the editing PIN
 
 Over SSH, run:
 
 ```sh
 cd /home/USERNAME/jeffginger.com/power
-php setup.php /home/USERNAME/housecurrent-power-private --reset-password
+php setup.php /home/USERNAME/housecurrent-power-private --reset-pin
 ```
 
-Enter the new password privately. Data is preserved, and existing editing sessions become invalid. Never reset by deleting the database.
+Enter the new 6–12 digit PIN privately. Data is preserved, and existing editing sessions become invalid. After uploading this version, use this command once to replace an existing password with a PIN. Existing password hashes remain valid until reset; the login API keeps compatibility during that transition. Never reset by deleting the database.
 
 ## Protections and verification
 

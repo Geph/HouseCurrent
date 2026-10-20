@@ -51,9 +51,9 @@ The editable app saves to browser-local storage. Data is separate between browse
 
 Source files do not contain the household device inventory. Personal backups, generated website snapshots, and local hosting metadata are excluded from Git.
 
-## Hosted editing with a password
+## Hosted editing with a PIN
 
-For a PHP-capable host such as DreamHost VPS, Housecurrent also supports public viewing with password-protected editing and shared server data. It uses PHP 8.1+ and PDO SQLite, with the database stored outside the public website folder. No production password is included in source or generated files.
+For a PHP-capable host such as DreamHost VPS, Housecurrent also supports public viewing with PIN-protected editing and shared server data. It uses PHP 8.1+ and PDO SQLite, with the database stored outside the public website folder. New editing PINs contain 6–12 digits. No production PIN is included in source or generated files.
 
 ```sh
 node build-server.mjs

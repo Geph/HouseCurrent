@@ -9,7 +9,7 @@ authButton.textContent=READ_ONLY?'Sign in to edit':'Sign out'
 if(!READ_ONLY)$('.local-note').innerHTML='<div>Editing household<small>Changes are saved on the server.</small></div>'
 authButton.addEventListener('click',async()=>{
  if(!READ_ONLY){try{await serverAPI('logout',{});location.reload()}catch(error){toast(error.message)}return}
- modal('Sign in to edit','Viewing stays public. Editing requires your household password.',field('Password','password','password','','required autocomplete="current-password" maxlength="72"'),'Sign in','server-login')
+ modal('Sign in to edit','Viewing stays public. Editing requires your household PIN.',field('PIN','password','password','','required autocomplete="current-password" inputmode="numeric" maxlength="72"'),'Sign in','server-login')
  $('#active-form').addEventListener('submit',async event=>{
   event.preventDefault();event.stopImmediatePropagation()
   const form=event.target,button=form.querySelector('[type=submit]');button.disabled=true
