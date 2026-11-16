@@ -246,9 +246,9 @@ export function removeRoom(s,id){const room=s.rooms.find(r=>r.id===id);if(!room)
 
 export function roomUsage(items){
   const totals=new Map()
-  for(const x of items){const key=roomKey(x.d.room);if(!totals.has(key))totals.set(key,{kwh:0,gridLow:0,gridHigh:0,solarLow:0,solarHigh:0,mixedKwh:0,count:0})
+  for(const x of items){const key=roomKey(x.d.room);if(!totals.has(key))totals.set(key,{kwh:0,gridKwh:0,gridLow:0,gridHigh:0,solarLow:0,solarHigh:0,mixedKwh:0,count:0})
     const r=totals.get(key);r.count++;r.kwh+=x.kwh
-    if(x.d.source==='grid'){r.gridLow+=x.low;r.gridHigh+=x.high}
+    if(x.d.source==='grid'){r.gridKwh+=x.kwh;r.gridLow+=x.low;r.gridHigh+=x.high}
     else if(x.d.source==='solar'){r.solarLow+=x.low;r.solarHigh+=x.high}
     else r.mixedKwh+=x.kwh
   }

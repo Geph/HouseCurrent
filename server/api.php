@@ -27,9 +27,11 @@ try {
     $cookiePath=rtrim(str_replace('\\','/',dirname($_SERVER['SCRIPT_NAME'])), '/') . '/';
     session_name('hc_' . substr(hash('sha256', __DIR__),0,16));
     session_set_cookie_params(['lifetime'=>0,'path'=>$cookiePath,'secure'=>$https,'httponly'=>true,'samesite'=>'Strict']);
+    ini_set('session.gc_maxlifetime', '28800');
+    session_save_path($directory);
     session_start();
     if (!isset($_SESSION['csrf'])) $_SESSION['csrf']=bin2hex(random_bytes(32));
-    $editable=isset($_SESSION['last_active']) && time()-(int)$_SESSION['last_active']<1800 && hash_equals(hash('sha256',$passwordHash),$_SESSION['credential_version'] ?? '');
+    $editable=isset($_SESSION['last_active']) && time()-(int)$_SESSION['last_active']<28800 && hash_equals(hash('sha256',$passwordHash),$_SESSION['credential_version'] ?? '');
     if ($editable) $_SESSION['last_active']=time();
     else unset($_SESSION['last_active']);
     $method=$_SERVER['REQUEST_METHOD'];

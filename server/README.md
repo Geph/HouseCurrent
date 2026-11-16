@@ -17,7 +17,7 @@ Requires PHP **8.1 or newer**, PDO SQLite, HTTPS, and SSH access for setup. Use 
    php setup.php /home/USERNAME/housecurrent-power-private
    ```
 
-4. Choose and repeat your own PIN at the private terminal prompts. Use 6–12 digits (0–9), with no letters or symbols. Do not put the password in a command argument, source file, GitHub, or this chat. On an interactive Unix terminal, password input is hidden. Only its password hash is saved.
+4. Choose and repeat your own PIN at the private terminal prompts. Use 4 digits (0–9), with no letters or symbols. Do not put the password in a command argument, source file, GitHub, or this chat. On an interactive Unix terminal, password input is hidden. Only its password hash is saved.
 5. Open **https://jeffginger.com/power/** and choose **Sign in to edit**.
 6. Once signed in, use **Restore backup** to import your current JSON backup. This initial import replaces the starter records. Visitors never need to upload a file. Afterwards, add and adjust devices directly on the hosted site.
 
@@ -30,7 +30,7 @@ Setup refuses to overwrite an existing installation. There is no public web setu
 - Visitors open the link and see current shared records. Open public pages check for updates every 30 seconds while visible, except during sign-in.
 - Sign in to add devices, one-time uses, locations, bills, or rate settings. The usual edit and remove controls appear after authentication.
 - Saves complete on the server before the app confirms success. Signing out returns to public viewing.
-- Sessions expire after 30 minutes without an API request. A stale editor cannot overwrite another tab's newer data: it receives a conflict message and keeps its form open. Copy any unsaved input, reload, and apply it to the latest records.
+- Sessions expire after eight hours without an API request. A stale editor cannot overwrite another tab's newer data: it receives a conflict message and keeps its form open. Copy any unsaved input, reload, and apply it to the latest records.
 - Continue exporting JSON backups regularly. Restoring a backup replaces shared records for everyone. The database also retains the latest 21 saved revisions, but JSON export is the normal recovery and migration route; there is no revision-history interface yet.
 - Local offline edits do not automatically synchronize with the hosted site. Once migrated, use the hosted app as your main editor to avoid divergent copies.
 
@@ -53,7 +53,7 @@ cd /home/USERNAME/jeffginger.com/power
 php setup.php /home/USERNAME/housecurrent-power-private --reset-pin
 ```
 
-Enter the new 6–12 digit PIN privately. Data is preserved, and existing editing sessions become invalid. After uploading this version, use this command once to replace an existing password with a PIN. Existing password hashes remain valid until reset; the login API keeps compatibility during that transition. Never reset by deleting the database.
+Enter the new 4 digit PIN privately. Data is preserved, and existing editing sessions become invalid. After uploading this version, use this command once to replace an existing password with a PIN. Existing password hashes remain valid until reset; the login API keeps compatibility during that transition. Never reset by deleting the database.
 
 ## Protections and verification
 

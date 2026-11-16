@@ -34,9 +34,9 @@ test('PHP authentication, CSRF, persistence, rate limits, conflicts and password
  for(const name of ['api.php','store.php','setup.php'])execFileSync(php,[...phpArgs,'-l',path.join(publicDir,name)])
  const plainHTTP=execFileSync(php,[...phpArgs,'-r','putenv("HOUSECURRENT_ALLOW_LOCAL_HTTP"); require $argv[1];',path.join(publicDir,'api.php')],{encoding:'utf8'})
  assert.match(JSON.parse(plainHTTP).error,/Use HTTPS/)
- const password='728459',newPassword='99183726'
+ const password='0284',newPassword='9918'
  const setup=(secret,reset=false)=>execFileSync(php,[...phpArgs,path.join(publicDir,'setup.php'),privateDir,...(reset?['--reset-pin']:[])],{input:secret+'\n'+secret+'\n',encoding:'utf8'})
- for(const invalid of ['12345','1234567890123','12345a'])assert.throws(()=>setup(invalid),/PINs must match and contain 6–12 digits/)
+ for(const invalid of ['123','12345','123a'])assert.throws(()=>setup(invalid),/PINs must match and contain 4 digits/)
  assert.match(setup(password),/Configured/)
  const socket=net.createServer();await new Promise(resolve=>socket.listen(0,'127.0.0.1',resolve));const port=socket.address().port;await new Promise(resolve=>socket.close(resolve))
  const base=`http://127.0.0.1:${port}`

@@ -23,11 +23,12 @@ The app includes an anonymized starter electricity bill and a sample seasonal ra
 - **Devices:** Enter active watts, standby watts, and a schedule, or record multiple measured kWh intervals. Standby runs outside active hours and is not counted twice.
 - **Schedules:** Run every day or on selected days, continuously or for specific hours. The Nighttime hours checkbox follows one shared winter/summer schedule configured on the rates page.
 - **One-time use:** Record EV charging or other occasional loads as total kWh, or use continuous watts between two dates. Delivered-energy entries can account for charging losses; measured wall energy is used directly.
-- **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups appear by base grid cost, highest first (using the displayed cost estimate); headers show average watts, total energy, and base grid cost.
+- **Locations:** Add, rename, remove, and color locations using the blue Locations button. Inventory groups are ranked by grid kWh, highest first. Location headers show grid energy, average grid watts, and estimated base grid cost for the selected period. Solar and mixed energy remain visible on their own device rows.
 - **Inventory labels:** Scheduled and continuous-watt estimates are labeled **Est. Continual**, recorded kWh events **One-Time**, and measured device readings **Metered**. Method labels sit beneath each device name alongside its date interval or schedule, with no separate method column. Devices with specific days or hours show their schedule there, including seasonal nighttime hours; locations appear in group headers.
 - **Power sources:** Separate grid-powered, off-grid solar, and mixed/unallocated loads. Solar items have a panel icon and green background.
 - **Billing periods:** View a saved utility billing interval or usage since the current billing period began. Entries outside the selected period are hidden.
-- **Summary:** See grid kWh, solar kWh, average grid kWh/day (excluding solar and mixed loads), base grid energy cost, and estimated savings from solar. The daily grid average has a dark card, grid cost a muted red card, and solar totals green cards.
+- **EV charging cost:** The estimate uses the selected period’s grid-only base energy cost in the **EV Charging** location, multiplied by 1.5 to account for additional charges.
+- **Summary:** See grid kWh, solar kWh, average grid kWh/day (excluding solar and mixed loads), estimated grid cost, and estimated savings from solar. Grid cost and solar savings use the same 1.5× multiplier. The daily grid average has a dark card, grid cost a muted red card, and solar totals green cards.
 - **Backups:** Export and restore validated JSON files containing records, locations, rates, and settings.
 
 On phones, the inventory uses compact rows with labeled power, energy, and value fields. A **Backup / login** navigation control opens backup tools and, on the PHP version, sign-in or sign-out.
@@ -38,7 +39,7 @@ The supplied schedule uses summer rates from June through September and winter r
 
 - Reporting intervals include the starting date and exclude the ending date.
 - Grid costs without a known peak/off-peak split display one estimate: the midpoint of the calculated minimum and maximum base energy costs. Known schedules and timing keep their calculated cost.
-- Modeled costs and savings cover **base energy charges**, not the full utility bill.
+- Inventory rows and location totals use **base energy charges**. The three cost and savings cards apply a 1.5× estimate to base amounts; fixed fees are excluded. Recorded utility bill amounts are unchanged.
 - Utility bills already measure grid imports; solar is never subtracted from those imports again.
 - An AC solar meter after the inverter measures delivered energy. Cumulative solar readings retained in backups use counter differences and support meter-reset baselines. The current interface tracks solar loads on Devices rather than providing a separate solar journal page.
 - Solar kWh entries without hourly timing use estimated savings of **$0.08/kWh in winter** and **$0.10/kWh in summer**. A single unknown allocation spanning both seasons retains a range. Scheduled loads follow their modeled times; cumulative solar meter values retain a time-of-use range.
@@ -53,7 +54,7 @@ Source files do not contain the household device inventory. Personal backups, ge
 
 ## Hosted editing with a PIN
 
-For a PHP-capable host such as DreamHost VPS, Housecurrent also supports public viewing with PIN-protected editing and shared server data. It uses PHP 8.1+ and PDO SQLite, with the database stored outside the public website folder. New editing PINs contain 6–12 digits. No production PIN is included in source or generated files.
+For a PHP-capable host such as DreamHost VPS, Housecurrent also supports public viewing with PIN-protected editing and shared server data. It uses PHP 8.1+ and PDO SQLite, with the database stored outside the public website folder. New editing PINs contain 4 digits. No production PIN is included in source or generated files.
 
 ```sh
 node build-server.mjs

@@ -18,9 +18,9 @@ function hc_read_secret(string $prompt,bool $tty): string {
     try {$value=trim(fgets(STDIN) ?: '');} finally {if($tty){shell_exec('stty echo');fwrite(STDOUT,"\n");}}
     return $value;
 }
-$password=hc_read_secret('Choose a PIN (6–12 digits): ',$tty);
+$password=hc_read_secret('Choose a PIN (4 digits): ',$tty);
 $again=hc_read_secret('Repeat PIN: ',$tty);
-if (!preg_match('/\A[0-9]{6,12}\z/',$password) || $password!==$again) {fwrite(STDERR,"PINs must match and contain 6–12 digits (0–9). Nothing configured.\n");exit(1);}
+if (!preg_match('/\A[0-9]{4}\z/',$password) || $password!==$again) {fwrite(STDERR,"PINs must match and contain 4 digits (0–9). Nothing configured.\n");exit(1);}
 $state=json_decode(file_get_contents(__DIR__ . '/starter-state.json'), true, 128, JSON_THROW_ON_ERROR);
 hc_validate_state($state);
 $db->exec('BEGIN IMMEDIATE');
